@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :users do 
     # Wild tweets can only be created, read and destroyed, not changed.
-    resources :tweets, only: [:new, :create, :destory, :show]
+    resources :tweets, only: [:new, :create, :destory, :show, :index]
   end
 
   resources :user_sessions, only: [:new, :create, :destory]
