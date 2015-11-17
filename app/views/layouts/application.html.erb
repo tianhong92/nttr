@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Authy</title>
+  <title><%= controller.controller_name %></title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if !flash.empty? %>
-    <pre>
-      <%= flash.inspect %>
-    </pre>
-  <% end %>
-
   <% flash.keys.each do |key, value| %>
     <%= content_tag :div, value, class: "flash #{key}" %>
   <% end %>
@@ -20,9 +14,6 @@
     <span><%= link_to 'Register', new_user_path %></span>
     <span><%= link_to 'Login', new_user_session_path %></span>
   <% else %>
-    <pre>
-      <%= current_user.inspect %>
-    </pre>
     <span>Welcome back, <%= current_user.login %></span>
     <%= link_to 'profile', user_path(current_user.id) %>
     <%-# Question: What is the programmatic way to get the destory session %>
