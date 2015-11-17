@@ -1,0 +1,21 @@
+<% if user_session.errors.any? %>
+  <ul class="session__errors">
+    <% user_session.errors.each do |attribute, error| %>
+      <li class="error__list-item">
+        <span class="error__attribute"><%= attribute %></span>
+        <span class="error__message"><%= error %></span>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for user_session do |form| %>
+  <%= form.label :login, 'Username:' %>
+  <%= form.text_field :login %>
+
+  <%= form.label :password, 'Password:' %>
+  <%= form.password_field :password %>
+  
+  <%= form.submit 'Sign in.' %>
+<% end %>
+

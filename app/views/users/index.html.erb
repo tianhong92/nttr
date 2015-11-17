@@ -1,0 +1,2 @@
+<h3>Registered users:</h3>
+<%= render partial: 'users/partials/user', collection: @users.order('created_at desc') %>
