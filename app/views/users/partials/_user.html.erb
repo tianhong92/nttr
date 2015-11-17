@@ -1,8 +1,4 @@
-<div class="user" id="user--<%= user.id %>">
-  <div class="user__name">
-    <%= content_tag :span, user.email, class: 'user__email' %>
-    <%= content_tag :span, user.login, class: 'user__name' %>
-  </div>
-  <div class="user__email">
-  </div>
+<div class="user profile" id="user--<%= user.id %>">
+  <%= link_to user.login, user_path(user.id), class: 'user__meta' %>
+  <%= render partial: 'tweets/partials/tweet', collection: user.tweets %>
 </div>
