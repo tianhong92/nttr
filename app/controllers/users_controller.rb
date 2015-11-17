@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include ApplicationHelper
+
   before_action :all_users, only: [:index, :create, :update]
   before_action :user_id, only: [:edit, :update, :destroy, :show]
   before_action :new_user, only: [:index, :new]
