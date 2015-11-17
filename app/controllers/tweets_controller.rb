@@ -15,6 +15,9 @@ class TweetsController < ApplicationController
     # No point in a separate form.
   end
 
+  def index
+  end
+
   def create
     if current_user
       # Question: Is this the correct manner?
