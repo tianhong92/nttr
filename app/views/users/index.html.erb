@@ -1,2 +1,6 @@
-<h3>Registered users:</h3>
-<%= render partial: 'users/partials/user', collection: @users.order('created_at desc') %>
+<% if current_user %>
+  <h3>Tweet some:</h3>
+  <%= render partial: 'tweets/partials/create', locals: { user: @user } %>
+<% end %>
+
+<%= render partial: 'tweets/partials/tweet', collection: Tweet.order('created_at desc').all %>
