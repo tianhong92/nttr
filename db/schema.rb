@@ -15,9 +15,12 @@ ActiveRecord::Schema.define(version: 20151117134636) do
 
   create_table "tweets", force: :cascade do |t|
     t.text     "content",    null: false
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "tweets", ["user_id"], name: "index_tweets_on_user_id"
 
   create_table "user_sessions", force: :cascade do |t|
     t.string   "session_id", null: false
@@ -28,6 +31,7 @@ ActiveRecord::Schema.define(version: 20151117134636) do
 
   create_table "users", force: :cascade do |t|
     t.string   "login",                         null: false
+    t.string   "email",                         null: false
     t.string   "crypted_password",              null: false
     t.string   "password_salt",                 null: false
     t.string   "persistence_token",             null: false
@@ -39,11 +43,6 @@ ActiveRecord::Schema.define(version: 20151117134636) do
     t.string   "current_login_ip"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.string   "email"
   end
-
-  add_index "users", ["last_request_at"], name: "index_users_on_last_request_at"
-  add_index "users", ["login"], name: "index_users_on_login"
-  add_index "users", ["persistence_token"], name: "index_users_on_persistence_token"
 
 end
