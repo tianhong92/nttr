@@ -1,3 +1,240 @@
 // Place all the styles related to the tweets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+//
+// Colours
+// I scalped some code of mine to manage paletted.
+// https://github.com/bhalash/scss-helpers/blob/master/_colours.scss
+//
+
+$colors: (
+    blue: (
+        x-light: #eaf2ff,
+        light: #b3ccfa,
+        base: #87adf4,
+        dark: #6292e9,
+        x-dark: #4075d7,
+    ),
+    red: (
+        x-light: #d95151,
+        light: #fea9a9,
+        base: #ea7575,
+        dark: #d33939,
+        x-dark: #cd1c1c,
+    ),
+    grey: (
+        // Approximate!
+        x-light: #fff,
+        light: #ccc,
+        base: #7f7f7f,
+        dark: #333,
+        x-dark: #000,
+    )
+);
+
+@function palette($color, $tone: 'base') {
+    @return map-get(map-get($colors, $color), $tone);
+}
+
+// Vertical spacing between elements.
+$vspace: 1rem;
+
+//
+// Defaults.
+//
+
+h1, h2, h3, h4, h5, h6, li, ol, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: palette(blue);
+
+    &:not(:hover) {
+        text-decoration: none;
+    }
+}
+
+html {
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 100%;
+}
+
+body {
+    // Die, margin, die.
+    margin: 0;
+}
+
+input, textarea {
+    // Reset and override all button styles, even on iOS.
+    border: 0;
+    outline: 0;
+     -webkit-appearance: none;
+}
+
+//
+// Site wrapper.
+//
+
+.twitter {
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 50rem;
+    padding: 0 5%;
+    width: 100%;
+
+    &__welcome {
+        // Site title.
+        font-size: 4rem;
+        line-height: 6.472rem;
+    }
+}
+
+//
+// Tweet creation form.
+//
+
+.create {
+    &__button {
+        // Submit button.
+        background-color: palette(blue);
+        color: palette(grey, x-light);
+        padding: 0.5rem;
+    }
+
+    &__content {
+        // Form.
+        box-sizing: border-box;
+        border: 0.1rem solid palette(grey);
+        font-size: 2rem;
+        height: 4rem;
+        line-height: 2rem;
+        // Hide scrollbar in closed state.
+        overflow-y: hidden;
+        padding: 1rem;
+        // text-align: center;
+        transition: height .15s;
+        width: 100%;
+
+        &:focus {
+            border-color: palette(blue);
+            height: 8rem;
+        }
+    }
+}
+
+// 
+// Form output errors.
+//
+
+.error {
+    &--highlight {
+        border: 0.1rem solid palette(red, dark) !important;
+        color: palette(red, dark);
+
+        &:focus, &:active, &:hover {
+            border: inherit;
+        }
+    }
+
+    &__list {
+    }
+
+    &__list-item {
+        color: palette(red, dark);
+        font-weight: bold;
+
+        &:first-letter {
+            text-transform: capitalize;
+        }
+    }
+}
+
+//
+// Tweet.
+//
+
+.tweet {
+    &:before {
+        border-top: 1px solid #000;
+        content: '';
+        display: block;
+        height: 0.1rem;
+        margin-bottom: 0.5rem;
+        width: 100%;
+    }
+
+    &__interior {
+        padding: 0.5rem;
+    }
+
+    &:hover &__interior {
+        background-color: rgba(palette(blue), 0.1);
+    }
+
+    &__content {
+        font-size: 2rem;
+    }
+}
+
+// 
+// Generics.
+//
+
+.clearfix {
+    overflow: auto;
+
+    &:after {
+        clear: both;
+        content: '';
+        display: table;
+    }
+}
+
+.float {
+    &--left {
+        float: left;
+    }
+
+    &--right {
+        float: right;
+    }
+}
+
+.text {
+    &--small {
+        font-size: 0.75rem;
+    }
+
+    &--big {
+        font-size: 1.5rem;
+    }
+
+    &--center {
+        text-align: center;
+    }
+}
+
+.disp {
+    &--none {
+        display: none;
+    }
+}
+
+.vspace {
+    margin-bottom: $vspace;
+
+    &--half {
+        margin-bottom: $vspace * 0.5;
+    }
+
+    &--top {
+        margin-top: $vspace;
+    }
+}
+
+.hide-empty:empty {
+    display: none;
+}
