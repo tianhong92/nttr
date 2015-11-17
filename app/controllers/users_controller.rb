@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   before_action :new_user, only: [:index, :new]
 
   def index
+    if current_user
+      # Question: Is this the correct manner?
+      @user = User.find(current_user.id)
+    end
   end
 
   def new
