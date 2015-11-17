@@ -25,7 +25,7 @@ class TweetsController < ApplicationController
 
     if @tweet.save 
       # render partial: 'tweets/partials/tweet', locals: { tweet: @tweet }
-      redirect_to user_path(@user)
+      redirect_to users_path
     else 
       # Ask how to correctly raise an error here, then dispatch HTML and
       # expect it at the client level.
