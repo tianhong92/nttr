@@ -27,8 +27,8 @@ class TweetsController < ApplicationController
     @tweet = @user.tweets.create(tweet_params)
 
     if @tweet.save 
-      # render partial: 'tweets/partials/tweet', locals: { tweet: @tweet }
-      redirect_to users_path
+      render partial: 'tweets/tweet', locals: { tweet: @tweet }
+      # redirect_to users_path
     else 
       # Ask how to correctly raise an error here, then dispatch HTML and
       # expect it at the client level.
@@ -48,6 +48,9 @@ class TweetsController < ApplicationController
   private 
     def tweet_params
       params.require(:tweet).permit(:content)
+    end
+
+    def create_tweet
     end
 
     def tweets_redirect
