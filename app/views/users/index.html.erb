@@ -3,4 +3,5 @@
   <%= render partial: 'tweets/tweet', collection: Tweet.includes(:user).order('created_at desc').all %>
 <% else %>
   <%= render partial: 'users/register', locals: { user: @user } %>
+  <%= render partial: 'user_sessions/login', locals: { user_session: @user_session } %>
 <% end %>
