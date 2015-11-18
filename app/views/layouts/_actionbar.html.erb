@@ -1,0 +1,13 @@
+<nav class="actionbar">
+  <% if current_user_session %>
+    <%-# FIXME TODO %>
+    <span>Welcome back, <%= current_user.nicename.gsub(/\s.*/, '') %></span>
+    <%= adorable_avatar(current_user, 20) %>
+    <%= link_to 'profile', user_path(current_user.id) %>
+    <%-# Question: What is the programmatic way to get the destory session link from here? %>
+    <%= link_to 'logout', '/logout', method: :delete %>
+  <% else %>
+    <span><%= link_to 'Login', new_user_session_path %></span>
+    <span><%= link_to 'Register', new_user_path %></span>
+  <% end %>
+</nav>
