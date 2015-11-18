@@ -1,5 +1,5 @@
 <div class="tweet-form" id="tweet-form">
-  <%= form_for [user, user.tweets.build] do |form| %>
+  <%= form_for [user, user.tweets.build], remote: true do |form| %>
     <%= form.text_area :content %>
     <%= form.submit %>
   <% end %>
