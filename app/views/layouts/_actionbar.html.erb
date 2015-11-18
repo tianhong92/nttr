@@ -7,7 +7,6 @@
     <%-# Question: What is the programmatic way to get the destory session link from here? %>
     <%= link_to 'logout', '/logout', method: :delete %>
   <% else %>
-    <span><%= link_to 'Login', new_user_session_path %></span>
-    <span><%= link_to 'Register', new_user_path %></span>
+    <%-# Not logged in stuff here. %>
   <% end %>
 </nav>
