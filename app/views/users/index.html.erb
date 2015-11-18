@@ -1,6 +1,6 @@
 <% if current_user %>
   <h3>Tweet some:</h3>
-  <%= render partial: 'tweets/partials/create', locals: { user: @user } %>
+  <%= render partial: 'tweets/create', locals: { user: @user } %>
 <% end %>
 
-<%= render partial: 'tweets/partials/tweet', collection: Tweet.order('created_at desc').all %>
+<%= render partial: 'tweets/tweet', collection: Tweet.includes(:user).order('created_at desc').all %>
