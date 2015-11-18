@@ -9,8 +9,11 @@
 <% end %>
 
 <%= form_for user do |form| %>
-  <%= form.label :login, 'Username:' %>
+  <%= form.label :login, 'Preferred username:' %>
   <%= form.text_field :login %>
+
+  <%= form.label :nicename, 'Display name:' %>
+  <%= form.text_field :nicename %>
 
   <%= form.label :email, 'Email address:' %>
   <%= form.text_field :email %>
