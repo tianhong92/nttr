@@ -1,12 +1,12 @@
 <div class="tweet" id="tweet--<%= tweet.id %>">
   <div class="tweet__photo">
-    <%= adorable_avatar(@user) %>
+    <%= adorable_avatar(tweet.user) %>
   </div>
     <div class="tweet__body">
       <div class="tweet__username">
-        <%= content_tag :span, link_to(@user.login, user_path(@user), class: 'tweet__profile-link'), class: 'tweet__user' %>
+        <%= content_tag :span, link_to(tweet.user.login, user_path(tweet.user), class: 'tweet__profile-link'), class: 'tweet__user' %>
         <span class="tweet__datetime">
-          <%= link_to user_path(@user), class: 'tweet__link' do %>
+          <%= link_to user_path(tweet.user), class: 'tweet__link' do %>
             <time datetime="<%= tweet.created_at %>"><%= time_ago_in_words(tweet.created_at).gsub('about','') %>
           <% end %>
         </span>
