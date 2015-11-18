@@ -1,7 +1,8 @@
 <nav class="actionbar">
   <% if current_user_session %>
-    <%-# FIXME TODO %>
-    <span>Welcome back, <%= current_user.nicename.gsub(/\s.*/, '') %></span>
+    <div class="actionbar__user">
+      <%= content_tag :span, current_user.nicename.gsub(/\s.*/, ''), class: 'actionbar__username' %></span>
+    </div>
     <%= adorable_avatar(current_user, 20) %>
     <%= link_to 'profile', user_path(current_user.id) %>
     <%-# Question: What is the programmatic way to get the destory session link from here? %>
