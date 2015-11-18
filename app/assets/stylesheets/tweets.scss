@@ -5,17 +5,17 @@
 //
 
 .twitter {
-    box-sizing: border-box;
-    margin: 0 auto;
-    max-width: 50rem;
-    padding: 0 5%;
-    width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 50rem;
+  padding: 0 5%;
+  width: 100%;
 
-    &__welcome {
-        // Site title.
-        font-size: 4rem;
-        line-height: 6.472rem;
-    }
+  &__welcome {
+    // Site title.
+    font-size: 4rem;
+    line-height: 6.472rem;
+  }
 }
 
 //
@@ -23,32 +23,32 @@
 //
 
 .create {
-    &__button {
-        // Submit button.
-        background-color: palette(blue);
-        color: palette(grey, x-light);
-        padding: 0.5rem;
-    }
+  &__button {
+    // Submit button.
+    background-color: palette(blue);
+    color: palette(grey, x-light);
+    padding: 0.5rem;
+  }
 
-    &__content {
-        // Form.
-        box-sizing: border-box;
-        border: 0.1rem solid palette(grey);
-        font-size: 2rem;
-        height: 4rem;
-        line-height: 2rem;
-        // Hide scrollbar in closed state.
-        overflow-y: hidden;
-        padding: 1rem;
-        // text-align: center;
-        transition: height .15s;
-        width: 100%;
+  &__content {
+    // Form.
+    box-sizing: border-box;
+    border: 0.1rem solid palette(grey);
+    font-size: 2rem;
+    height: 4rem;
+    line-height: 2rem;
+    // Hide scrollbar in closed state.
+    overflow-y: hidden;
+    padding: 1rem;
+    // text-align: center;
+    transition: height .15s;
+    width: 100%;
 
-        &:focus {
-            border-color: palette(blue);
-            height: 8rem;
-        }
+    &:focus {
+      border-color: palette(blue);
+      height: 8rem;
     }
+  }
 }
 
 // 
@@ -56,26 +56,26 @@
 //
 
 .error {
-    &--highlight {
-        border: 0.1rem solid palette(red, dark) !important;
-        color: palette(red, dark);
+  &--highlight {
+    border: 0.1rem solid palette(red, dark) !important;
+    color: palette(red, dark);
 
-        &:focus, &:active, &:hover {
-            border: inherit;
-        }
+    &:focus, &:active, &:hover {
+      border: inherit;
     }
+  }
 
-    &__list {
+  &__list {
+  }
+
+  &__list-item {
+    color: palette(red, dark);
+    font-weight: bold;
+
+    &:first-letter {
+      text-transform: capitalize;
     }
-
-    &__list-item {
-        color: palette(red, dark);
-        font-weight: bold;
-
-        &:first-letter {
-            text-transform: capitalize;
-        }
-    }
+  }
 }
 
 //
@@ -83,26 +83,26 @@
 //
 
 .tweet {
-    &:before {
-        border-top: 1px solid #000;
-        content: '';
-        display: block;
-        height: 0.1rem;
-        margin-bottom: 0.5rem;
-        width: 100%;
-    }
+  &:before {
+    border-top: 1px solid #000;
+    content: '';
+    display: block;
+    height: 0.1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
 
-    &__interior {
-        padding: 0.5rem;
-    }
+  &__interior {
+    padding: 0.5rem;
+  }
 
-    &:hover &__interior {
-        background-color: rgba(palette(blue), 0.1);
-    }
+  &:hover &__interior {
+    background-color: rgba(palette(blue), 0.1);
+  }
 
-    &__content {
-        font-size: 2rem;
-    }
+  &__content {
+    font-size: 2rem;
+  }
 }
 
 // 
@@ -110,57 +110,57 @@
 //
 
 .clearfix {
-    overflow: auto;
+  overflow: auto;
 
-    &:after {
-        clear: both;
-        content: '';
-        display: table;
-    }
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
 }
 
 .float {
-    &--left {
-        float: left;
-    }
+  &--left {
+    float: left;
+  }
 
-    &--right {
-        float: right;
-    }
+  &--right {
+    float: right;
+  }
 }
 
 .text {
-    &--small {
-        font-size: 0.75rem;
-    }
+  &--small {
+    font-size: 0.75rem;
+  }
 
-    &--big {
-        font-size: 1.5rem;
-    }
+  &--big {
+    font-size: 1.5rem;
+  }
 
-    &--center {
-        text-align: center;
-    }
+  &--center {
+    text-align: center;
+  }
 }
 
 .disp {
-    &--none {
-        display: none;
-    }
+  &--none {
+    display: none;
+  }
 }
 
 .vspace {
-    margin-bottom: $vspace;
+  margin-bottom: $vspace;
 
-    &--half {
-        margin-bottom: $vspace * 0.5;
-    }
+  &--half {
+    margin-bottom: $vspace * 0.5;
+  }
 
-    &--top {
-        margin-top: $vspace;
-    }
+  &--top {
+    margin-top: $vspace;
+  }
 }
 
 .hide-empty:empty {
-    display: none;
+  display: none;
 }
