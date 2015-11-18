@@ -7,7 +7,8 @@ module ApplicationHelper
     # Question: Is this insertion correct?
     src = "http://api.adorable.io/avatars/#{size}/#{avatar}.png"
     alt = "#{user.login}'s handsome avatar."
+    size = "#{size}x#{size}"
 
-    link_to image_tag(src, alt: alt), user_path(user)
+    link_to image_tag(src, alt: alt, size: size), user_path(user)
   end
 end
