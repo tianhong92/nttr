@@ -83,25 +83,60 @@
 //
 
 .tweet {
-  &:before {
-    border-top: 1px solid #000;
-    content: '';
-    display: block;
-    height: 0.1rem;
-    margin-bottom: 0.5rem;
-    width: 100%;
-  }
+  display: flex;
+  position: relative;
+  padding-top: 1rem;
 
-  &__interior {
-    padding: 0.5rem;
-  }
-
-  &:hover &__interior {
+  &:hover { 
     background-color: rgba(palette(blue), 0.1);
   }
 
+  &__link {
+    &:not(:hover) {
+      color: palette(blue, light);
+    }
+  }
+
+  &__body {
+    flex: 1;
+    padding: 0 0.5rem;
+  }
+
   &__content {
+    color: palette(grey, dark);
     font-size: 2rem;
+  }
+
+  &__photo {
+    flex: 0 1 4rem;
+    text-align: center;
+  }
+
+  &__profile-link {
+    font-weight: bold;
+
+    &:not(:hover) {
+      color: palette(grey, x-dark);
+    }
+  }
+}
+
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.rounded {
+  &--small {
+    border-radius: 0.2rem;
+  }
+
+  &--medium {
+    border-radius: 0.4rem;  
+  }
+
+  &--large {
+    border-radius: 0.8rem;
   }
 }
 
