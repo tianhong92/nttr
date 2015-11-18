@@ -33,7 +33,7 @@ class TweetsController < ApplicationController
       # Ask how to correctly raise an error here, then dispatch HTML and
       # expect it at the client level.
       # render json: @tweet.errors.messages, status: 422
-      render partial: 'tweets/partials/error', locals: { tweet: @tweet }, status: 422
+      render partial: 'error', locals: { tweet: @tweet }, status: 422
     end
   end
 
