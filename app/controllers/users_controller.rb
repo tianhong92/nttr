@@ -13,6 +13,8 @@ class UsersController < ApplicationController
     if current_user
       # Question: Is this the correct manner?
       @user = User.find(current_user.id)
+    else 
+      @user = User.new
     end
   end
 
