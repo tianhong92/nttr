@@ -1,6 +1,8 @@
 <% if current_user %>
   <%= render partial: 'tweets/create', locals: { user: @user } %>
-  <%= render partial: 'tweets/tweet', collection: Tweet.includes(:user).order('created_at desc').all %>
+  <div class="tweet-list" id="tweet-list">
+    <%= render partial: 'tweets/tweet', collection: Tweet.includes(:user).order('created_at desc').all %>
+  </div>
 <% else %>
   <%= render partial: 'users/register', locals: { user: @user } %>
   <%= render partial: 'user_sessions/login', locals: { user_session: @user_session } %>
