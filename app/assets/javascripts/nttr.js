@@ -7,11 +7,11 @@ $(document).ready(function() {
         form: {
             id: '#new_tweet',
             counter: '.create__counter',
-            input: '.create__content',
+            input: '#tweet__content',
             errors: '.create__errors'
         },
         tweet: '.tweet',
-        list: '#tweets',
+        list: '#tweet-list',
         del: '.tweet__delete',
         err: 'error--highlight',
         max: 140
