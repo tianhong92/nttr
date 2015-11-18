@@ -1,16 +1,19 @@
-<div class="tweet" id="tweet--<%= tweet.id %>">
+<div class="tweet vspace" id="tweet--<%= tweet.id %>">
   <div class="tweet__photo">
-    <%= adorable_avatar(tweet.user) %>
+    <%= adorable_avatar(tweet.user, 50, 'rounded--medium') %>
   </div>
     <div class="tweet__body">
       <div class="tweet__username">
-        <%= content_tag :span, link_to(tweet.user.login, user_path(tweet.user), class: 'tweet__profile-link'), class: 'tweet__user' %>
+        <%= content_tag :span, link_to(tweet.user.nicename, user_path(tweet.user), class: 'tweet__profile-link'), class: 'tweet__user' %>
         <span class="tweet__datetime">
-          <%= link_to user_path(tweet.user), class: 'tweet__link' do %>
+          <%= link_to user_tweet_path(tweet.user.id, tweet.id), class: 'tweet__link' do %>
             <time datetime="<%= tweet.created_at %>"><%= time_ago_in_words(tweet.created_at).gsub('about','') %>
           <% end %>
         </span>
       </div>
     <%= content_tag :p, tweet.content, class: 'tweet__content vspace--half' %>
+    <% if current_user.id == tweet.user.id %>
+      <span class="tweet__delete float--right"><%= link_to 'Delete', user_tweet_path(tweet.user.id, tweet.id), method: :delete, remote: true %></span>
+  <% end %>
   </div>
 </div>
