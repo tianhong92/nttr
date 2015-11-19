@@ -10,9 +10,15 @@
 <% else %>
 
   <div class="welcome" id="welcome">
-    <%-# Else greet new users. %>
-    <%= render partial: 'users/register', locals: { user: @user } %>
-    <%= render partial: 'user_sessions/login', locals: { user_session: @user_session } %>
+    <div class="float--left welcome__greeting">
+      <h1 class="welcome__title">Welcome to nttr.</h1>
+      <p class="welcome__message">Join <%= @users.count %> other people at nttr, the world's greatest vowelless microblogging service.</p>
+    </div>
+
+    <div class="float--right welcome__forms">
+      <%= render partial: 'user_sessions/login', locals: { user_session: @user_session } %>
+      <%= render partial: 'users/register', locals: { user: @user } %>
+    </div>
   </div>
 
 <% end %>
