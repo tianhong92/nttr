@@ -1,4 +1,25 @@
+html {
+  font-size: 100%;
+}
+
+body {
+  background-color: #f5f8fa;
+
+  &.no-session {
+    background: center/cover url('/assets/background-2.jpg');
+    min-height: 100vh;
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
+}
+
+a {
+  color: #3b94d9;
+
+  &:not(:hover) {
+    text-decoration: none;
+  }
 }

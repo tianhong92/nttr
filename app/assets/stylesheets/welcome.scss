@@ -1,10 +1,5 @@
 @import 'variables';
 
-body.no-session {
-  background: center/cover url('/assets/background-1.jpg');
-  min-height: 100vh;
-}
-
 .welcome {
   box-sizing: border-box;
   padding: 5%;
@@ -21,8 +16,6 @@ body.no-session {
 
   &__form {
     background: #fff;
-    border: solid 0.1rem #ddd;
-    border-radius: 0.4rem;
     padding: 1rem;
   }
 
