@@ -9,6 +9,7 @@
   <%= render partial: 'layouts/actionbar' %>
 
   <% flash.keys.each do |key, value| %>
+    <%-# TODO: Better style and handling. %>
     <%= content_tag :div, value, class: "flash #{key}" %>
   <% end %>
 
