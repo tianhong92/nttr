@@ -1,0 +1,70 @@
+@import 'variables';
+
+.display {
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  &--inline-block {
+    display: inline-block;
+  }
+
+  &--inline {
+    display: inline;
+  }
+
+  &--none {
+    display: none;
+  }
+
+  &--flex {
+    display: flex;
+  }
+}
+
+.vmargin {
+  &--full {
+    margin-bottom: $vmargin;
+  }
+
+  &--half {
+    margin-bottom: $vmargin * 0.5;
+  }
+
+  &--quarter {
+    margin-bottom: $vmargin * 0.25;
+  }
+}
+
+
+.text {
+  &--light {
+    font-weight: normal;
+  }
+
+  &--small {
+    font-size: 75%;
+  }
+}
+
+.clearfix {
+  overflow: auto; 
+
+  :after {
+    clear: both;
+    content: '';
+    display: table;
+    width: 100%;
+  }
+}
+
+.float {
+  &--left {
+    float: left;
+  }
+
+  &--right {
+    float: right;
+  }
+}

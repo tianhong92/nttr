@@ -1,0 +1,62 @@
+@import 'variables';
+
+button, fieldset, input, textarea {
+  // Remove default CSS styles.
+  -webkit-border-radius: 0;
+  border: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+input:not([type=checkbox]) {
+  // Removes iOS rounding on buttons.
+  -webkit-appearance: none;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+.form {
+  position: relative;
+  width: 100%;
+
+  &--input {
+    border: solid 0.1rem #ddd;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+
+    &:focus {
+      border-color: cornflowerblue;
+      box-shadow: 0 0 0.4rem 0 rgba(cornflowerblue, 0.75);
+    }
+  }
+
+  &--submit {
+    background: cornflowerblue;
+    border: solid 0.1rem #ddd;
+    border-radius: 0.25rem;
+    color: #fff;
+    opacity: 0.9;
+    padding: 0.5rem 0.75rem;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:active {
+      opacity: 1;
+    }
+  }
+
+  &--label {
+    font-weight: bold;
+  }
+}
+
+#user_session_password {
+  // 100% - button width - ($vmargin / 2)
+  width: calc(100% - 78px - #{$vmargin * 0.5});
+}

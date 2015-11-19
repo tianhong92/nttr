@@ -1,0 +1,53 @@
+@import 'variables';
+
+body.no-session {
+  background: center/cover url('/assets/background-1.jpg');
+  min-height: 100vh;
+}
+
+.welcome {
+  box-sizing: border-box;
+  padding: 5%;
+  margin: 0 auto;
+  max-width: 1024px;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    left: 50%;
+    position: absolute;
+    top: 25%;
+    transform: translate(-50%, -25%);
+  }
+
+  &__form {
+    background: #fff;
+    border: solid 0.1rem #ddd;
+    border-radius: 0.4rem;
+    padding: 1rem;
+  }
+
+  &__forms {
+    @media screen and (min-width: 768px) {
+      width: 40%;
+    } 
+
+    @media screen and (max-width: 768px) {
+      float: none !important;
+    }
+  }
+
+  &__greeting {
+    box-sizing: border-box;
+    color: #fff;
+    padding: $vmargin;
+    padding-right: 0;
+
+    @media screen and (min-width: 768px) {
+      width: calc(60% - #{$vmargin});
+    } 
+
+    @media screen and (max-width: 768px) {
+      float: none !important;
+    }
+  }
+}
