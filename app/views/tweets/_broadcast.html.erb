@@ -1,17 +1,15 @@
 <div class="broadcast" id="broadcast">
-  <%= form_for [user, user.tweets.build], html: { class: 'form clearfix' }, remote: true do |form| %>
-    <%-# TODO: Form errors. How do I define the tweet object here? %>
-    <%-# TODO: This /may/ work. Leaving up for debug purposes. %>
-    <%= tweet.inspect %>
 
-    <fieldset form="<%= form.options[:html][:id] %>" name="create__contents">
-      <%= form.text_area :content, placeholder: 'Do you want to nttr?', maxlength: 140, class: 'create__content', tabindex: 1 %>
+  <%= form_for [user, user.tweets.build], html: { class: 'form clearfix' }, remote: true do |form| %>
+
+    <fieldset>
+      <%= form.text_area :content, placeholder: 'Do you want to nttr?', maxlength: 140, class: 'broadcast__content form--input display--block vmargin--half', tabindex: 1 %>
     </fieldset>
 
-    <fieldset form="<%= form.options[:html][:id] %>" name="text create__submission">
+    <fieldset>
       <%-# Tweet length counter. %>
-      <span class="form__span create__counter float--left disp--none">0</span>
-      <%= form.submit 'nttr', class: 'submit create__submit' %>
+      <span class="form__span broadcast__counter float--left disp--none">0</span>
+      <%= form.submit 'nttr', class: 'button button--submit form--submit float--right', tabindex: 2 %>
     </fieldset>
   <% end %>
 </div>
