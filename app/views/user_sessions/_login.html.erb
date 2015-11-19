@@ -1,4 +1,5 @@
 <div class="form login" id="login-form">
+
   <% if user_session.errors.any? %>
     <ul class="errors login__errors">
       <% user_session.errors.each do |attribute, message| %>
