@@ -3,7 +3,6 @@
     <ul class="errors login__errors">
       <% user_session.errors.each do |attribute, message| %>
         <li class="login__error errors__error">
-          <%= content_tag :span, attribute, class: 'error--attribute' %>
           <%= content_tag :span, message, class: 'error--message' %>
         </li>
       <% end %>
