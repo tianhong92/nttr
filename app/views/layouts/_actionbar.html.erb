@@ -1,4 +1,4 @@
-<nav class="actionbar">
+<nav class="actionbar" id="actionbar">
   <% if current_user_session %>
     <div class="actionbar__user">
       <%= content_tag :span, current_user.nicename.gsub(/\s.*/, ''), class: 'actionbar__username' %></span>
