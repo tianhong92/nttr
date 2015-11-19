@@ -41,8 +41,7 @@ gem 'authlogic', '~> 3.4.6'
 # Generate documentation.
 gem 'yard', '~> 0.8.7.6'
 # Bootstrap and Autoprefixer.
-gem 'bootstrap-sass', '~> 3.3.1'
-gem 'autoprefixer-rails'
+gem 'normalize-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
