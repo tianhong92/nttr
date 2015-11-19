@@ -11,24 +11,24 @@
     </ul>
   <% end %>
 
-  <%= form_for user_session do |form| %>
-    <fieldset form="<%= form.options[:html][:id] %>" name="login__usernames">
-      <%= form.label :login, 'Username:', class: 'login__username-label' %>
-      <%= form.text_field :login, class: 'name login__username' %>
-    </fieldset>
+  <%= form_for user_session, html: { class: 'form-control' } do |form| %>
+    <div class="form-group">
+      <%= form.label :login, 'Username:' %>
+      <%= form.text_field :login, class: 'form-control' %>
+    </div>
 
-    <fieldset form="<%= form.options[:html][:id] %>" name="login__passwords">
-      <%= form.label :password, 'Password:', class: 'login__password-label label' %>
-      <%= form.password_field :password, class: 'password login__password' %>
-    </fieldset>
+    <div class="form-group">
+      <%= form.label :password, 'Password:' %>
+      <%= form.password_field :password, class: 'form-control' %>
+    </div>
 
-    <fieldset form="<%= form.options[:html][:id] %>" name="login__rememberance">
-      <%= form.label :remember_me, class: 'login__remember-label label' %>
-      <%= form.check_box :remember_me, class: 'check login__remember' %>
-    </fieldset>
+    <div class="form-group">
+      <%= form.label :remember_me, class: 'sr-only' %>
+      <%= form.check_box :remember_me, class: 'form-control' %>
+    </div>
     
-    <fieldset form="<%= form.options[:html][:id] %>" name="login__submission">
-      <%= form.submit'Sign In', class: 'submit login__submit' %>
-    </fieldset>
+    <div class="form-group">
+      <%= form.submit'Sign In', class: 'form-control' %>
+    </div>
   <% end %>
 </div>
