@@ -68,3 +68,19 @@
     float: right;
   }
 }
+
+.border { 
+  border: solid 0.2rem #ddd;
+
+  &--thick {
+    border: solid 0.3rem #ddd;
+  }
+
+  &--thin {
+    border: solid 0.1rem #ddd;
+  }
+}
+
+.rounded {
+  border-radius: 0.4rem;
+}

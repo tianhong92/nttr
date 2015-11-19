@@ -1,0 +1,30 @@
+.tweets {
+  background: #fff;
+  margin: 3rem auto;
+  max-width: 768px;
+
+  @media screen and (max-width: 768px) {
+    box-sizing: border-box;
+    margin: 5%;
+  }
+}
+
+.tweet {
+  box-sizing: border-box;
+  padding: 1rem;
+
+  &:not(:first-child) {
+    border-top: solid 0.1rem #ddd;
+  }
+
+  &:hover {
+    background-color: #f7f7f7;
+  }
+}
+
+.broadcast {
+  background: #ebf4fb;
+  border-bottom: solid 0.1rem #ddd;
+  box-sizing: border-box;
+  padding: 1rem;
+}
