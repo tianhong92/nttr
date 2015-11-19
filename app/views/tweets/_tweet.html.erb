@@ -1,15 +1,15 @@
-<div class="tweet vspace" id="tweet--<%= tweet.id %>">
-  <div class="tweet__photo">
+<div class="tweet clearfix" id="tweet--<%= tweet.id %>">
+  <div class="tweet__photo float--left">
     <%-# Tweet author photogarph. %>
     <%= adorable_avatar(tweet.user, 50, 'rounded--medium') %>
   </div>
 
-  <div class="tweet__body clearfix">
+  <div class="tweet__body float--right">
     <div class="tweet__username">
       <%-# Tweet authot information. %>
-      <%= content_tag :span, link_to(tweet.user.nicename, user_path(tweet.user), class: 'tweet__profile-link'), class: 'tweet__user' %>
+      <%= content_tag :span, link_to(tweet.user.nicename, user_path(tweet.user), class: 'text--bold tweet__profile-link'), class: 'tweet__user text--small float--left' %>
 
-      <span class="tweet__datetime">
+      <span class="tweet__datetime text--small float--left">
         <%-# Tweet meta information (creation) %>
         <%= link_to user_tweet_path(tweet.user.id, tweet.id), class: 'tweet__link' do %>
           <%-# Datetime is in compliant format. %>
@@ -24,7 +24,7 @@
     <% if current_user.id == tweet.user.id %>
       <%-# Tweet delete link. %>
       <%-# FIXME TODO: There ARE better ways to authenticate this. Implement them! %>
-      <span class="tweet__delete float--right"><%= link_to 'Delete', user_tweet_path(tweet.user.id, tweet.id), method: :delete, remote: true %></span>
+      <span class="tweet__delete text--small float--right"><%= link_to 'Delete', user_tweet_path(tweet.user.id, tweet.id), method: :delete, remote: true %></span>
     <% end %>
   </div>
 </div>
