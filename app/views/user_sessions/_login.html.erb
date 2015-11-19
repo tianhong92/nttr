@@ -1,34 +1,29 @@
-<div class="form login" id="login-form">
-
+<div class="welcome__form login vmargin--full" id="login">
   <% if user_session.errors.any? %>
     <ul class="errors login__errors">
       <% user_session.errors.each do |attribute, message| %>
-        <li class="login__error error">
-          <%= content_tag :span, attribute, class: 'error__attribute' %>
-          <%= content_tag :span, message, class: 'error__message' %>
+        <li class="login__error errors__error">
+          <%= content_tag :span, attribute, class: 'error--attribute' %>
+          <%= content_tag :span, message, class: 'error--message' %>
         </li>
       <% end %>
     </ul>
   <% end %>
 
-  <%= form_for user_session, html: { class: 'form-control' } do |form| %>
-    <div class="form-group">
-      <%= form.label :login, 'Username:' %>
-      <%= form.text_field :login, class: 'form-control' %>
-    </div>
+  <%= form_for user_session, html: { class: 'clearfix form' } do |form| %>
+    <fieldset>
+      <%= form.text_field :login, class: 'vmargin--half display--block form--input', placeholder: 'Username', autofocus: true %>
+    </fieldset>
 
-    <div class="form-group">
-      <%= form.label :password, 'Password:' %>
-      <%= form.password_field :password, class: 'form-control' %>
-    </div>
+    <fieldset>
+      <%= form.password_field :password, class: 'float--left vmargin--half form--input', placeholder: 'Password' %>
+      <%= form.submit'Sign In', class: 'float--right button button--submit form--submit' %>
+    </fieldset>
 
-    <div class="form-group">
-      <%= form.label :remember_me, class: 'sr-only' %>
-      <%= form.check_box :remember_me, class: 'form-control' %>
-    </div>
-    
-    <div class="form-group">
-      <%= form.submit'Sign In', class: 'form-control' %>
-    </div>
+    <fieldset>
+      <%= form.check_box :remember_me, class: 'form-control', checked: true %>
+      <%= form.label :remember_me, 'Remember me', class: 'text--small' %>
+    </fieldset>
   <% end %>
 </div>
+
