@@ -1,29 +1,43 @@
-<% if user.errors.any? %>
-  <ul class="user__errors">
-    <% user.errors.each do |attribute, error| %>
-      <li class="error__list-item">
-        <span class="error__message"><%= error %></span>
-      </li>
+<div class="form register" id="register-form">
+  <% if user.errors.any? %>
+    <ul class="errors register__errors">
+      <% user.errors.each do |attribute, error| %>
+        <li class="register__error error">
+          <%= content_tag :span, attribute, class: 'error__attribute' %>
+          <%= content_tag :span, message, class: 'error__message' %>
+        </li>
+    <% end %>
+    </ul>
   <% end %>
-  </ul>
-<% end %>
 
-<%= form_for user do |form| %>
-  <%= form.label :login, 'Preferred username:' %>
-  <%= form.text_field :login %>
+  <%= form_for user do |form| %>
+    <fieldset form="<%= form.options[:html][:id] %>" name="register__usernames">
+      <%= form.label :login, 'Preferred username:', class: 'register__username-label' %>
+      <%= form.text_field :login, class: 'name register__username' %>
+    </fieldset>
 
-  <%= form.label :nicename, 'Display name:' %>
-  <%= form.text_field :nicename %>
+    <fieldset form="<%= form.options[:html][:id] %>" name="register__nicename">
+      <%= form.label :nicename, 'Display name:', class: 'register__nicename-label' %>
+      <%= form.text_field :nicename, class: 'name register__nicename' %>
+    </fieldset>
 
-  <%= form.label :email, 'Email address:' %>
-  <%= form.text_field :email %>
+    <fieldset form="<%= form.options[:html][:id] %>" name="register__emails">
+      <%= form.label :email, 'Email address:', class: 'register__email-label' %>
+      <%= form.text_field :email, class: 'email register__email' %>
+    </fieldset>
 
-  <%= form.label :password, 'Password:' %>
-  <%= form.password_field :password %>
+    <fieldset form="<%= form.options[:html][:id] %>" name="register__passwords">
+      <%= form.label :password, 'Password:', class: 'register__password-label' %>
+      <%= form.password_field :password, class: 'password register__password' %>
+    </fieldset>
 
-  <%= form.label :password_confirmation, 'Confirm password:' %>
-  <%= form.password_field :password_confirmation %>
-  
-  <%= form.submit 'Register me up!' %>
-<% end %>
-
+    <fieldset form="<%= form.options[:html][:id] %>" name="register__passwords-confirm">
+      <%= form.label :password_confirmation, 'Confirm password:', class: 'register__passwordconfirm-label' %>
+      <%= form.password_field :password_confirmation, class: 'password register__passwordconfirm' %>
+    </fieldset>
+      
+    <fieldset form="<%= form.options[:html][:id] %>" name="register__submission">
+      <%= form.submit 'Register me up!', class: 'submit register__submit' %>
+    </fieldset>
+  <% end %>
+</div>
