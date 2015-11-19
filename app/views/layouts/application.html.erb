@@ -6,7 +6,7 @@
   <title><%= controller.controller_name %></title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 </head>
-<body>
+<body class="<%= current_user_session ? 'sesion' : 'no-session' %>">
   <%= render partial: 'layouts/actionbar' %>
 
   <% flash.keys.each do |key, value| %>
@@ -14,7 +14,7 @@
     <%= content_tag :div, value, class: "flash #{key}" %>
   <% end %>
 
-  <main class="nttr container" id="nttr">
+  <main class="nttr" id="nttr">
     <%= yield %>
   </main>
 
