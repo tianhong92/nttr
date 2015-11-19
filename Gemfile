@@ -29,6 +29,9 @@ gem 'authlogic', '~> 3.4.6'
 # Normalize.css
 gem 'normalize-rails'
 
+# Generate documentation.
+gem 'yard', '~> 0.8.7.6'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
