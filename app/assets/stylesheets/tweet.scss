@@ -1,3 +1,5 @@
+@import 'variables';
+
 .tweets {
   background: #fff;
   margin: 3rem auto;
@@ -19,6 +21,27 @@
 
   &:hover {
     background-color: #f7f7f7;
+  }
+
+  &__photo {
+    width: 50px;
+  }
+
+  &__body {
+    width: calc(100% - 50px - #{$vmargin})
+  }
+
+  &__datetime {
+    padding-left: 0.1rem;
+
+    &:before {
+      // ' ·'
+      content: '\0020\00B7';
+    }
+  }
+
+  &__profile-link {
+    color: #000;
   }
 }
 
