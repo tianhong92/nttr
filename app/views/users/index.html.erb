@@ -2,9 +2,11 @@
 <% if current_user %>
 
   <%-# Fetch all tweets + tweet-form if logged in. %>
-  <%= render partial: 'tweets/create', locals: { user: @user, tweet: @user.tweets.build } %>
-  <div class="tweets tweet-list" id="tweets">
-    <%= render partial: 'tweets/tweet', collection: Tweet.includes(:user).order('created_at desc').all %>
+  <div class="tweets border--thin rounded" id="tweets">
+    <%= render partial: 'tweets/create', locals: { user: @user, tweet: @user.tweets.build } %>
+    <div class="tweet-list">
+      <%= render partial: 'tweets/tweet', collection: Tweet.includes(:user).order('created_at desc').all %>
+    </div>
   </div>
 
 <% else %>

@@ -4,7 +4,7 @@
     <%= adorable_avatar(tweet.user, 50, 'rounded--medium') %>
   </div>
 
-  <div class="tweet__body">
+  <div class="tweet__body clearfix">
     <div class="tweet__username">
       <%-# Tweet authot information. %>
       <%= content_tag :span, link_to(tweet.user.nicename, user_path(tweet.user), class: 'tweet__profile-link'), class: 'tweet__user' %>
