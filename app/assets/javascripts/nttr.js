@@ -6,12 +6,12 @@ $(document).ready(function() {
     var tweets = {
         form: {
             id: '#new_tweet',
-            counter: '.create__counter',
-            input: '#tweet__content',
+            counter: '.broadcast__counter',
+            input: '#tweet_content',
             errors: '.create__errors'
         },
         tweet: '.tweet',
-        list: '#tweet-list',
+        list: '.tweet-list',
         del: '.tweet__delete',
         err: 'error--highlight',
         max: 140
@@ -29,8 +29,8 @@ $(document).ready(function() {
             counter: '',
             max: tweets.max,
             tolerance: 15,
-            warnClass: 'text--red',
-            dispClass: 'disp--none'
+            warnClass: 'text--error',
+            dispClass: 'display--none'
         }, args);
 
         this.on('keyup', function() {
