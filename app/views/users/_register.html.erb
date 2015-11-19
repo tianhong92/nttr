@@ -1,4 +1,5 @@
 <div class="form register" id="register-form">
+
   <% if user.errors.any? %>
     <ul class="errors register__errors">
       <% user.errors.each do |attribute, error| %>
@@ -6,7 +7,7 @@
           <%= content_tag :span, attribute, class: 'error__attribute' %>
           <%= content_tag :span, message, class: 'error__message' %>
         </li>
-    <% end %>
+      <% end %>
     </ul>
   <% end %>
 
