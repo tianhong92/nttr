@@ -1,5 +1,4 @@
-<div class="form create" id="create-form">
-
+<div id="create-form">
   <%= form_for [user, user.tweets.build], remote: true do |form| %>
     <%-# TODO: Form errors. How do I define the tweet object here? %>
     <%-# TODO: This /may/ work. Leaving up for debug purposes. %>
