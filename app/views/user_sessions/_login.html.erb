@@ -1,6 +1,6 @@
-<div class="login" id="login">
+<div class="form login" id="login-form">
   <% if user_session.errors.any? %>
-    <ul class="login__errors">
+    <ul class="errors login__errors">
       <% user_session.errors.each do |attribute, message| %>
         <li class="login__error error">
           <%= content_tag :span, attribute, class: 'error__attribute' %>
@@ -11,23 +11,23 @@
   <% end %>
 
   <%= form_for user_session do |form| %>
-    <fieldset form="<%= form.options[:html][:id] %>">
-      <%= form.label :login, 'Username:' %>
-      <%= form.text_field :login %>
+    <fieldset form="<%= form.options[:html][:id] %>" name="login__usernames">
+      <%= form.label :login, 'Username:', class: 'login__username-label' %>
+      <%= form.text_field :login, class: 'name login__username' %>
     </fieldset>
 
-    <fieldset form="<%= form.options[:html][:id] %>">
-      <%= content_tag :span, form.label(:password, 'Password:'), class: 'login__password-label label' %>
-      <%= content_tag :span, form.password_field(:password), class: 'login__password' %>
+    <fieldset form="<%= form.options[:html][:id] %>" name="login__passwords">
+      <%= form.label :password, 'Password:', class: 'login__password-label label' %>
+      <%= form.password_field :password, class: 'password login__password' %>
     </fieldset>
 
-    <fieldset form="<%= form.options[:html][:id] %>">
-      <%= content_tag :span, form.label(:remember_me), class: 'login__remember-label label' %>
-      <%= content_tag :span, form.check_box(:remember_me), class: 'login__remember' %>
+    <fieldset form="<%= form.options[:html][:id] %>" name="login__rememberance">
+      <%= form.label :remember_me, class: 'login__remember-label label' %>
+      <%= form.check_box :remember_me, class: 'check login__remember' %>
     </fieldset>
     
-    <fieldset form="<%= form.options[:html][:id] %>">
-      <%= content_tag :span, form.submit('Sign In'), class: 'login__submit' %>
+    <fieldset form="<%= form.options[:html][:id] %>" name="login__submission">
+      <%= form.submit'Sign In', class: 'submit login__submit' %>
     </fieldset>
   <% end %>
 </div>
