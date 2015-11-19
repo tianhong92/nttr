@@ -43,8 +43,17 @@
     font-weight: normal;
   }
 
+  &--bold {
+    font-weight: bold;
+  }
+
   &--small {
     font-size: 75%;
+  }
+
+  &--error {
+    // For warnings.
+    color: red;
   }
 }
 
