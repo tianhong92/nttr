@@ -1,4 +1,6 @@
 class TweetsController < ApplicationController
+  include TweetsHelper
+
   # All tweets.
   before_action :all_tweets, only: [:index, :create]
   # Create new tweet.
@@ -28,7 +30,6 @@ class TweetsController < ApplicationController
 
     if @tweet.save 
       render partial: 'tweets/tweet', locals: { tweet: @tweet }
-      # redirect_to users_path
     else 
       # Ask how to correctly raise an error here, then dispatch HTML and
       # expect it at the client level.
