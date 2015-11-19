@@ -4,6 +4,10 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+#################
+## Rails
+#################
+#
 # Ignore bundler config.
 /.bundle
 
@@ -15,6 +19,10 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Yard
+/doc
+.yardoc
 
 *.rbc
 capybara-*.html
