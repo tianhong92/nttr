@@ -1,6 +1,9 @@
 <div class="form create" id="create-form">
+
   <%= form_for [user, user.tweets.build], remote: true do |form| %>
     <%-# TODO: Form errors. How do I define the tweet object here? %>
+    <%-# TODO: This /may/ work. Leaving up for debug purposes. %>
+    <%= tweet.inspect %>
 
     <fieldset form="<%= form.options[:html][:id] %>" name="create__contents">
       <%= form.text_area :content, placeholder: 'Do you want to nttr?', maxlength: 140, class: 'create__content', tabindex: 1 %>
