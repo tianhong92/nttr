@@ -7,7 +7,11 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 </head>
 <body class="<%= current_user_session ? 'sesion' : 'no-session' %>">
-  <%= render partial: 'layouts/actionbar' %>
+  <% if current_user_session %>
+    <%= render partial: 'layouts/actionbar' %>
+  <% else %>
+    <%-# Not logged in stuff here. %>
+  <% end %>
 
   <% flash.keys.each do |key, value| %>
     <%-# TODO: Better style and handling. %>
