@@ -39,3 +39,25 @@
     margin-right: 1rem;
   }
 }
+
+// 
+// Main Container
+//
+
+.nttr {
+  background-color: #f5f8fa;
+  box-sizing: border-box;
+  // There rules are to ensure that vertically centered forms remain inside the element.
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+
+  &.no-session {
+    // Home, registration and login forms.
+    background: center/cover url('/assets/background-1.jpg');
+  }
+
+  &.session {
+    padding: 6rem 0 3rem;
+  }
+}

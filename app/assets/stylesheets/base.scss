@@ -3,12 +3,6 @@ html {
 }
 
 body {
-  background-color: #f5f8fa;
-
-  &.no-session {
-    background: center/cover url('/assets/background-2.jpg');
-    min-height: 100vh;
-  }
 }
 
 h1, h2, h3, h4, h5, h6 {
