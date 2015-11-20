@@ -1,7 +1,7 @@
 <div class="errors">
   <ul class="errors__list">
-    <% object.errors.each do |e| %>
-      <%= e.inspect %>
+    <% object.errors.each do |type,error| %>
+      <%= render partial: 'shared/error', locals: { type: type, error: error } %>
     <% end %>
   </ul>
 </div>

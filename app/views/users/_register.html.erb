@@ -1,12 +1,6 @@
 <div class="welcome__form rounded border--thin register" id="register">
   <% if user.errors.any? %>
-    <ul class="errors register__errors">
-      <% user.errors.each do |type, error| %>
-        <li class="error--<%= type %> register__error error">
-          <%= content_tag :span, error, class: "error__message" %>
-        </li>
-      <% end %>
-    </ul>
+    <%= render partial: 'shared/errors', locals: { object: user } %>
   <% end %>
 
   <%= form_for user, html: { class: 'form clearfix' } do |form| %>

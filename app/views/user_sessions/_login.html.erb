@@ -1,12 +1,6 @@
 <div class="welcome__form border--thin rounded login vmargin--full" id="login">
   <% if user_session.errors.any? %>
-    <ul class="errors login__errors">
-      <% user_session.errors.each do |type, error| %>
-        <li class="error--<%= type %> login__error error">
-          <%= content_tag :span, error, class: "error__message" %>
-        </li>
-      <% end %>
-    </ul>
+    <%= render partial: 'shared/errors', locals: { object: user_session } %>
   <% end %>
 
   <%= form_for user_session, html: { class: 'clearfix form' } do |form| %>

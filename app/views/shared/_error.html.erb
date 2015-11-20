@@ -1,6 +1,3 @@
-<% error.each do |e| %>
-  <%= e.inspect %>
-<% end %>
-<li class="error--<%= 'yolo' %> error--message">
-  <% content_tag :span, error, class: "error__string" %>
+<li class="error errors__message error--<%= type %>">
+  <%= content_tag :span, error, class: 'error__string' %>
 </li>

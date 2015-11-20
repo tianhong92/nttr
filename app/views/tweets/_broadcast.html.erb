@@ -1,7 +1,9 @@
 <div class="broadcast" id="broadcast">
+  <% if tweet.errors.any? %>
+    <%= render partial: 'shared/errors', locals: { object: tweet } %>
+  <% end %>
 
   <%= form_for [user, user.tweets.build], html: { class: 'form clearfix' }, remote: true do |form| %>
-
     <fieldset>
       <%= form.text_area :content, placeholder: 'Do you want to nttr?', maxlength: 140, class: 'broadcast__content form--input display--block vmargin--half', tabindex: 1 %>
     </fieldset>
