@@ -1,7 +1,6 @@
 <div class="broadcast" id="broadcast">
-  <% if tweet.errors.any? %>
-    <%= render partial: 'shared/errors', locals: { object: tweet } %>
-  <% end %>
+  <div class="broadcast__errors errors">
+  </div>
 
   <%= form_for [user, user.tweets.build], html: { class: 'form clearfix' }, remote: true do |form| %>
     <fieldset>
