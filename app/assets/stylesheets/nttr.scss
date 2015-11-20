@@ -1,3 +1,5 @@
+@import 'variables';
+
 .actionbar {
   background: #fff;
   border-bottom: solid 0.1rem #ddd;
@@ -45,7 +47,7 @@
 //
 
 .nttr {
-  background-color: #f5f8fa;
+  background-color: palette(background);
   box-sizing: border-box;
   // There rules are to ensure that vertically centered forms remain inside the element.
   min-height: 100vh;

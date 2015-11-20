@@ -79,19 +79,15 @@
 }
 
 .border { 
-  border: solid 0.2rem #ddd;
+  border: solid 0.2rem palette(border);
 
   &--thick {
-    border: solid 0.3rem #ddd;
+    border: solid 0.3rem palette(border);
   }
 
   &--thin {
-    border: solid 0.1rem #ddd;
+    border: solid 0.1rem palette(border);
   }
-}
-
-.rounded {
-  border-radius: 0.4rem;
 }
 
 .vcenter {
