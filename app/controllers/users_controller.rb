@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       redirect_to root_url
       flash[:notice] = 'Success!'
     else 
-      flash[:error] = @user.errors.messages
+      render template: 'users/new', locals: { user: @user }
     end
   end
 

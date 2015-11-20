@@ -13,7 +13,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = 'Login successful!'
       redirect_to root_url
     else
-      render action: :new
+      render template: 'user_sessions/new', locals: { user_session: @user_session }
     end
   end
 
