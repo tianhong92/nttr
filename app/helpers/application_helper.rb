@@ -8,7 +8,8 @@ module ApplicationHelper
     src = "http://api.adorable.io/avatars/#{size}/#{avatar}.png"
     alt = user.nicename
     size = "#{size}x#{size}"
-    classes = classes.prepend('adorable-avatar ')
+
+    classes << ' adorable-avatar'
 
     link_to image_tag(src, alt: alt, size: size, class: classes), user_path(user)
   end
