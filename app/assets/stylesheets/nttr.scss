@@ -51,13 +51,14 @@
   min-height: 100vh;
   overflow: hidden;
   position: relative;
+}
 
-  &.no-session {
-    // Home, registration and login forms.
-    background: center/cover url('/assets/background-1.jpg');
-  }
+.no-session {
+  // Home, registration and login forms.
+  background: center/cover url('/assets/background-1.jpg');
+}
 
-  &.session {
-    padding: 6rem 0 3rem;
-  }
+
+.session {
+  padding: 6rem 0 3rem;
 }
