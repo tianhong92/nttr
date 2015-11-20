@@ -93,3 +93,13 @@
 .rounded {
   border-radius: 0.4rem;
 }
+
+.vcenter {
+  @media screen and (min-width: 768px) {
+    left: 50%;
+    min-width: 40%;
+    position: absolute;
+    top: 25%;
+    transform: translate(-50%, -25%);
+  }
+}

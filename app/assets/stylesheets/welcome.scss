@@ -7,13 +7,6 @@
   max-width: 1024px;
   width: 100%;
 
-  @media screen and (min-width: 768px) {
-    left: 50%;
-    position: absolute;
-    top: 25%;
-    transform: translate(-50%, -25%);
-  }
-
   &__form {
     background: #fff;
     padding: 1rem;
