@@ -45,6 +45,14 @@
   background: palette(solid);
   box-sizing: border-box;
   padding: 1rem;
+
+  &__errors {
+    color: #fff;
+  }
+
+  &__counter {
+    color: #fff;
+  }
 }
 
 .adorable-avatar {
