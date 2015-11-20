@@ -1,7 +1,6 @@
 @import 'variables';
 
 .tweets {
-  background: #fff;
   margin: 0 auto;
   max-width: 768px;
 
@@ -27,7 +26,8 @@
     width: 50px;
   }
 
-  &__body {
+  &__wrap {
+    // Wraps rightside content.
     width: calc(100% - 50px - #{$vmargin})
   }
 
@@ -36,18 +36,17 @@
 
     &:before {
       // ' ·'
-      content: '\0020\00B7';
+      // content: '\0020\00B7';
     }
-  }
-
-  &__profile-link {
-    color: #000;
   }
 }
 
 .broadcast {
-  background: #ebf4fb;
-  border-bottom: solid 0.1rem #ddd;
+  background: palette(solid);
   box-sizing: border-box;
   padding: 1rem;
+}
+
+.adorable-avatar {
+  border-radius: 50%;
 }
