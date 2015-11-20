@@ -1,13 +1,14 @@
-<nav class="actionbar" id="actionbar">
-  <% if current_user_session %>
-    <div class="actionbar__user">
-      <%= content_tag :span, current_user.nicename.gsub(/\s.*/, ''), class: 'actionbar__username' %></span>
-    </div>
-    <%= adorable_avatar(current_user, 20) %>
-    <%= link_to 'profile', user_path(current_user.id) %>
-    <%-# Question: What is the programmatic way to get the destory session link from here? %>
-    <%= link_to 'logout', '/logout', method: :delete %>
-  <% else %>
-    <%-# Not logged in stuff here. %>
-  <% end %>
+<nav class="actionbar clearfix" id="actionbar">
+  <ul class="actionbar__list">
+    <li class="actionbar__brand actionbar__item">
+      <%= content_tag :span, link_to('nttr', root_url), class: 'actionbar__brandname' %>
+    </li>
+    <li class="actionbar__avatar actionbar__item float--right">
+      <%= adorable_avatar(current_user, 40) %>
+    </li>
+    <li class="actionbar__logout actionbar__item float--right">
+      <%-# Question: What is the programmatic way to get the destory session link from here? %>
+      <%= link_to 'logout', '/logout', method: :delete %>
+    </li>
+  </ul>
 </nav>
