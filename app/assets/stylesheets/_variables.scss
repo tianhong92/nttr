@@ -1,1 +1,31 @@
 $vmargin: 1rem;
+
+$palette: (
+  solid: (
+    dark: #1976d2,
+    base: #2196f3,
+    light: #bbdefb,
+  ),
+  text: (
+    base: #212121,
+    light: #727272,
+    accent: #9e9e9e,
+  ),
+  icon: (
+    // For icons and text laid upon solid->base/dark/light
+    base: #fff, 
+  ),
+  border: (
+    base: #b6b6b6,
+  ), 
+  error: (
+    base: #d32f2f,
+  ),
+  background: (
+    base: #ebebeb,
+  )
+);
+
+@function palette($color, $tone: 'base') {
+  @return map-get(map-get($palette, $color), $tone);
+}
