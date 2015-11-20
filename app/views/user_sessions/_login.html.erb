@@ -1,4 +1,4 @@
-<div class="welcome__form border--thin rounded login vmargin--full" id="login">
+<div class="welcome__form border--thin login vmargin--full" id="login">
   <% if user_session.errors.any? %>
     <%= render partial: 'shared/errors', locals: { object: user_session } %>
   <% end %>

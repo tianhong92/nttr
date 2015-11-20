@@ -1,4 +1,4 @@
-<div class="welcome__form rounded border--thin register" id="register">
+<div class="welcome__form border--thin register" id="register">
   <% if user.errors.any? %>
     <%= render partial: 'shared/errors', locals: { object: user } %>
   <% end %>
