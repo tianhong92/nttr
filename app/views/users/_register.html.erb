@@ -1,16 +1,15 @@
 <div class="welcome__form rounded border--thin register" id="register">
   <% if user.errors.any? %>
     <ul class="errors register__errors">
-      <% user.errors.each do |attribute, error| %>
-        <li class="register__error errors__error">
-          <%= content_tag :span, attribute, class: 'error--attribute' %>
-          <%= content_tag :span, message, class: 'error--message' %>
+      <% user.errors.each do |type, error| %>
+        <li class="error--<%= type %> register__error error">
+          <%= content_tag :span, error, class: "error__message" %>
         </li>
       <% end %>
     </ul>
   <% end %>
 
-  <%= form_for user, html: { class: 'form clearfix', autocomplete: 'off' } do |form| %>
+  <%= form_for user, html: { class: 'form clearfix' } do |form| %>
     <h2 class="vmargin--half">New to nttr? <span class="text--small text--light">Sign up</span></h2>
     <fieldset>
       <%= form.text_field :login, class: 'vmargin--half display--block form--input', placeholder: 'Username' %>
