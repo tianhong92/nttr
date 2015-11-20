@@ -4,22 +4,26 @@
     <%= adorable_avatar(tweet.user, 50, 'rounded--medium') %>
   </div>
 
-  <div class="tweet__body float--right">
-    <div class="tweet__username">
+  <div class="tweet__wrap float--right">
+    <p class="tweet__body">
       <%-# Tweet authot information. %>
-      <%= content_tag :span, link_to(tweet.user.nicename, user_path(tweet.user), class: 'text--bold tweet__profile-link'), class: 'tweet__user text--small float--left' %>
+      <%= content_tag :span, link_to(tweet.user.login, user_path(tweet.user), class: 'text--bold tweet__profile-link'), class: 'tweet__user float--left' %>
+      &nbsp;
+      <%= content_tag :span, tweet.content, class: 'tweet__content vspace--half' %>
+    </p>
 
+    <%-# Tweet content. %>
+    <%-# content_tag :p, tweet.content, class: 'tweet__content vspace--half' %>
+
+    <p>
       <span class="tweet__datetime text--small float--left">
         <%-# Tweet meta information (creation) %>
         <%= link_to user_tweet_path(tweet.user.id, tweet.id), class: 'tweet__link' do %>
           <%-# Datetime is in compliant format. %>
-          <time datetime="<%= tweet.created_at %>"><%= tweet_relative_time(tweet) %>
+          <time datetime="<%= tweet.created_at %>"><%= time_ago_in_words(tweet.created_at) %>
         <% end %>
       </span>
-    </div>
-
-    <%-# Tweet content. %>
-    <%= content_tag :p, tweet.content, class: 'tweet__content vspace--half' %>
+    </p>
 
     <% if current_user.id == tweet.user.id %>
       <%-# Tweet delete link. %>
