@@ -13,7 +13,7 @@ $(document).ready(function() {
     var tweet = {
         type: '.tweet',
         content: '.tweet-content',
-        list: '.tweet-list',
+        list: '.tweets-list',
         del: '.tweet-delete',
         err: 'error-highlight',
         max: 140
@@ -96,7 +96,7 @@ $(document).ready(function() {
     //
 
     function removeHook(err, data, state, xhr) {
-        $(this).closest(tweet.tweet).fadeOut(animationTime, function() {
+        $(this).closest(tweet.type).fadeOut(animationTime, function() {
             $(this).remove();
         });
     }
