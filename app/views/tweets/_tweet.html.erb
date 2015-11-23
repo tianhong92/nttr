@@ -1,24 +1,21 @@
-<div class="tweet clearfix" id="tweet--<%= tweet.id %>">
-  <div class="tweet__photo float--left">
+<div class="tweet clearfix" id="tweet-<%= tweet.id %>">
+  <div class="tweeto-photo pull-left">
     <%-# Tweet author photogarph. %>
-    <%= adorable_avatar(tweet.user, 50, 'rounded--medium') %>
+    <%= adorable_avatar(tweet.user, 50, 'classname') %>
   </div>
 
-  <div class="tweet__wrap float--right">
-    <p class="tweet__body">
+  <div class="tweet-wrap pull-right">
+    <p class="tweet-body">
       <%-# Tweet authot information. %>
-      <%= content_tag :span, link_to(tweet.user.login, user_path(tweet.user), class: 'text--bold tweet__profile-link'), class: 'tweet__user float--left' %>
+      <%= content_tag :span, link_to(tweet.user.login, user_path(tweet.user), class: 'text-bold tweet-profile-link'), class: 'tweet-user pull-left' %>
       &nbsp;
-      <%= content_tag :span, tweet.content, class: 'tweet__content vspace--half' %>
+      <%= content_tag :span, tweet.content, class: 'tweet-content vmargin-half' %>
     </p>
 
-    <%-# Tweet content. %>
-    <%-# content_tag :p, tweet.content, class: 'tweet__content vspace--half' %>
-
     <p>
-      <span class="tweet__datetime text--small float--left">
+      <span class="tweet-datetime text-small pull-left">
         <%-# Tweet meta information (creation) %>
-        <%= link_to user_tweet_path(tweet.user.id, tweet.id), class: 'tweet__link' do %>
+        <%= link_to user_tweet_path(tweet.user.id, tweet.id), class: 'tweet-link' do %>
           <%-# Datetime is in compliant format. %>
           <time datetime="<%= tweet.created_at %>"><%= time_ago_in_words(tweet.created_at) %>
         <% end %>
@@ -28,7 +25,7 @@
     <% if current_user.id == tweet.user.id %>
       <%-# Tweet delete link. %>
       <%-# FIXME TODO: There ARE better ways to authenticate this. Implement them! %>
-      <span class="tweet__delete text--small float--right"><%= link_to 'Delete', user_tweet_path(tweet.user.id, tweet.id), method: :delete, remote: true %></span>
+      <span class="tweet-delete pull-right"><%= link_to 'Delete', user_tweet_path(tweet.user.id, tweet.id), method: :delete, remote: true %></span>
     <% end %>
   </div>
 </div>
