@@ -1,60 +1,31 @@
 @import 'variables';
 
-button, fieldset, input, textarea {
-  // Remove default CSS styles.
-  -webkit-border-radius: 0;
-  border: 0;
-  border-radius: 0;
-  box-sizing: border-box;
-  outline: 0;
-}
+.login {
+    &-password {
+        // 100% - button width - ($vmargin * 0.75)
+        width: calc(100% - #{$login-submit-width} - #{$vmargin * 0.75});
+    }
 
-input:not([type=checkbox]) {
-  // Removes iOS rounding on buttons.
-  -webkit-appearance: none;
-}
-
-fieldset {
-  margin: 0;
-  padding: 0;
+    &-submit {
+        width: $login-submit-width;
+    }
 }
 
 .form {
-  position: relative;
-  width: 100%;
-
-  &--input {
-    // Form input and textarea elements.
-    box-shadow: inset 0 -0.1rem 0 0 rgba(palette(border), 0.5);
-    padding: 0.5rem 0.75rem;
-    transition: box-shadow .3s;
-
-    &:focus {
-      box-shadow: inset 0 -0.17rem 0 0 rgba(#000, 1);
-    }
-  }
-
-  &--submit {
-    background: palette(solid, dark);
-    color: #fff;
-    opacity: 0.9;
-    padding: 0.5rem 0.75rem;
-
-    &:hover {
-      opacity: 0.7;
+    &-auth {
+        background-color: #fff;
+        border: 1px solid $btn-default-border;
+        border-radius: $border-radius-base;
+        box-sizing: border-box;
+        padding: $vmargin;
     }
 
-    &:active {
-      opacity: 1;
+    &-wrapper {
+        box-sizing: border-box;
+        padding: 5%;
+
+        @media screen and (min-width: $screen-sm-min) {
+            padding: 5% 15%;
+        }
     }
-  }
-
-  &--label {
-    font-weight: bold;
-  }
-}
-
-#user_session_password {
-  // 100% - button width - ($vmargin / 2)
-  width: calc(100% - 78px - #{$vmargin * 0.5});
 }
