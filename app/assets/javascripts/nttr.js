@@ -125,26 +125,28 @@ $(document).ready(function() {
     });
 
     //
-    // TODO: FIXME
+    // Fix Sidebar Element on Page Scroll
     //
 
     $.fn.fixedwidget = function(args) {
+        //
+        // Fix Element on Scroll
+        //
+
         function fixOnScroll() {
-            // Set fixed state.
-            var scrolled = $(this).scrollTop() + args.tolerance > $self.parent().offset().top;
+            var scrolled = $(this).scrollTop() 
+                + args.tolerance > $self.parent().offset().top;
 
             if (scrolled) {
-                $self.css({
-                    position: 'fixed',
-                    top: args.tolerance
-                });
+                $self.css({ position: 'fixed', top: args.tolerance });
             } else {
-                $self.css({
-                    position: 'static',
-                    top: 0
-                });
+                $self.css({ position: 'static', top: 0 });
             }
         }
+
+        //
+        // Determine Whether $self should fix in plaace.
+        //
 
         function determineScrollState() {
             if ($(this).width() < args.minWidth) {
@@ -162,7 +164,8 @@ $(document).ready(function() {
 
         args = $.extend({}, {
             tolerance: 90,
-            minWidth: 768
+            // Bootstrap medium-> small breakpoint.
+            minWidth: 992
         }, args);
 
         var $self = this;
