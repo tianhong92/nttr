@@ -46,7 +46,7 @@
     box-sizing: border-box;
     padding: 1rem;
 
-    &:empty {
+    &-errors:empty {
         display: none;
     }
 }
