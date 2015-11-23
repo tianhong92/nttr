@@ -1,5 +1,9 @@
 @import 'variables';
 
+//
+// Display State
+//
+
 .display {
     &-block {
         display: block;
@@ -19,6 +23,10 @@
     }
 }
 
+// 
+// Vertical Spacing Margin
+//
+
 .vmargin {
     &-none {
         margin-bottom: 0;
@@ -28,18 +36,22 @@
         margin-bottom: $vmargin;
     }
 
-    &-half {
-        margin-bottom: $vmargin * 0.5;
-    }
-
     &-quarter {
         margin-bottom: $vmargin * 0.25;
+    }
+
+    &-half {
+        margin-bottom: $vmargin * 0.5;
     }
 
     &-double {
         margin-bottom: $vmargin * 2;
     }
 }
+
+// 
+// Vertical Spacing Padding
+//
 
 .vpadding {
     &-none {
@@ -50,12 +62,12 @@
         padding-bottom: $vpadding;
     }
 
-    &-half {
-        padding-bottom: $vpadding * 0.5;
-    }
-
     &-quarter {
         padding-bottom: $vpadding * 0.25;
+    }
+
+    &-half {
+        padding-bottom: $vpadding * 0.5;
     }
 
     &-double {
@@ -63,10 +75,18 @@
     }
 }
 
+//
+// Vertically-center Element
+//
+
 .vcenter {
     position: relative;
     top: 20vh;
 }
+
+//
+// Text Styles
+//
 
 .text {
     &-white {
@@ -77,6 +97,10 @@
         color: #000;
     }
 }
+
+//
+// Element Borders
+//
 
 .border { 
     border: 1px solid $btn-default-border;
@@ -97,6 +121,10 @@
         border-left: 1px solid $btn-default-border;
     }
 }
+
+//
+// General Element Styles
+//
 
 .background {
     &-white {
