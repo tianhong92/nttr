@@ -10,6 +10,10 @@
 }
 
 .tweet {
+    &-list-wrap {
+        border-left: 1px solid $btn-default-border;
+    }
+
     box-sizing: border-box;
     padding: 1rem;
 
