@@ -2,10 +2,10 @@
 <% if current_user %>
   <%-# Fetch all tweets + tweet-form if logged in. %>
   <div class="tweets row" id="tweets">
-    <div class="tweet-broadcast col-md-4">
+    <div class="tweet-broadcast col-md-4 col-sm-1">
       <%= render partial: 'tweets/broadcast', locals: { user: @user, tweet: @user.tweets.build } %>
     </div>
-    <div class="tweet-list-wrap col-md-8">
+    <div class="tweet-list-wrap col-md-8 col-sm-1">
       <div class="tweet-list">
         <h3 class="vmargin-full">Nttrs</h3>
         <%= render partial: 'tweets/tweet', collection: Tweet.includes(:user).order('created_at desc').all %>
