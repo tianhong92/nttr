@@ -5,9 +5,6 @@ $palette: (
     error: (
         base: #d32f2f,
     ),
-    background: (
-        base: #ebebeb,
-    )
 );
 
 @function palette($color, $tone: 'base') {
