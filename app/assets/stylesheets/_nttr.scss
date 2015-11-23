@@ -1,48 +1,48 @@
 @import 'variables';
 
 .actionbar {
-  background: palette(solid, dark);
-  box-sizing: border-box;
-  left: 0;
-  padding: 0 1rem;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 3;
+    background: palette(solid, dark);
+    box-sizing: border-box;
+    left: 0;
+    padding: 0 1rem;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 3;
 
-  &__list {
-    list-style-type: none;
-    margin: 0.5rem 0;
-  }
-
-  &__item {
-    display: inline-block;
-
-    &:not([class*="__avatar"]) {
-      // Increase the line-height of non-avatar actionbar items.
-      // This is a dirty hack versus a proper flexbox layout - but it works.
-      line-height: 40px;
+    &__list {
+        list-style-type: none;
+        margin: 0.5rem 0;
     }
 
-    a {
-      color: palette(icon);
+    &__item {
+        display: inline-block;
+
+        &:not([class*="__avatar"]) {
+            // Increase the line-height of non-avatar actionbar items.
+            // This is a dirty hack versus a proper flexbox layout - but it works.
+            line-height: 40px;
+        }
+
+        a {
+            color: palette(icon);
+        }
     }
-  }
 
-  &__brandname {
-    font-size: 2.1rem;
-  }
-
-  &__avatar {
-    a {
-      display: block;
-      height: 100%;
+    &__brandname {
+        font-size: 2.1rem;
     }
-  }
 
-  &__logout {
-    margin-right: 1rem;
-  }
+    &__avatar {
+        a {
+            display: block;
+            height: 100%;
+        }
+    }
+
+    &__logout {
+        margin-right: 1rem;
+    }
 }
 
 // 
@@ -50,19 +50,19 @@
 //
 
 .nttr {
-  box-sizing: border-box;
-  // There rules are to ensure that vertically centered forms remain inside the element.
-  min-height: 100vh;
-  overflow: hidden;
-  position: relative;
+    box-sizing: border-box;
+    // There rules are to ensure that vertically centered forms remain inside the element.
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
 }
 
 .no-session {
-  // Home, registration and login forms.
-  background: center/cover url('/assets/background-1.jpg');
+    // Home, registration and login forms.
+    background: center/cover url('/assets/background-1.jpg');
 }
 
 
 .session {
-  padding: 6rem 0 3rem;
+    padding: 6rem 0 3rem;
 }

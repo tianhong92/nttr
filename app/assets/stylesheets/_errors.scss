@@ -1,36 +1,36 @@
 @import 'variables';
 
 @keyframes error-flash {
-  from {
-    background-color: rgba(palette(error), 0.7);
-    color: #fff;
-    opacity: 0;
-  }
+    from {
+        background-color: rgba(palette(error), 0.7);
+        color: #fff;
+        opacity: 0;
+    }
 
-  to {
-    background-color: rgba(palette(error), 0);
-    color: #000;
-    opacity: 1;
-  }
+    to {
+        background-color: rgba(palette(error), 0);
+        color: #000;
+        opacity: 1;
+    }
 }
 
 .errors {
-  padding: 1rem 0;
+    padding: 1rem 0;
 
-  &__list {
-    padding: 0 0.5rem;
-  }
-
-  &__message {
-    display: inline-block; 
-
-    &:first-letter {
-      text-transform: uppercase;
+    &__list {
+        padding: 0 0.5rem;
     }
-  }
 
-  &--flash {
-    animation-name: error-flash;
-    animation-duration: 1s;
-  }
+    &__message {
+        display: inline-block; 
+
+        &:first-letter {
+            text-transform: uppercase;
+        }
+    }
+
+    &--flash {
+        animation-name: error-flash;
+        animation-duration: 1s;
+    }
 }
