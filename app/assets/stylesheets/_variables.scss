@@ -1,5 +1,26 @@
+//
+// Default Margin and Padding Values
+//
+
 $vmargin: 1rem;
+$vpadding: 1rem;
+
+//
+// Login Form Submit Button
+// It's floated to one side.
+//
+
 $login-submit-width: 70px;
+
+//
+// Tweets
+//
+
+$tweet-photo-width: 50px;
+
+// 
+// Colours Palette
+//
 
 $palette: (
     error: (
@@ -7,9 +28,17 @@ $palette: (
     ),
 );
 
+//
+// Retrive Colour from Palette
+//
+
 @function palette($color, $tone: 'base') {
   @return map-get(map-get($palette, $color), $tone);
 }
+
+//
+// Vertically Center Element
+//
 
 @mixin vcenter($x, $y) {
     @media screen and (min-width: $screen-md-min) {
