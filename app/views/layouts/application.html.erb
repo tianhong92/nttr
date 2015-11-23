@@ -4,10 +4,9 @@
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title><%= controller.controller_name %></title>
-  <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Roboto', media: 'all' %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 </head>
-<body>
+<body class="<%= current_user_session ? 'session' : 'no-session' %>">
   <% if current_user_session %>
     <%= render partial: 'layouts/actionbar' %>
   <% else %>
@@ -19,7 +18,7 @@
     <%= content_tag :div, value, class: "flash #{key}" %>
   <% end %>
 
-  <main class="nttr <%= current_user_session ? 'session' : 'no-session' %>" id="nttr">
+  <main class="container nttr" id="nttr">
     <%= yield %>
   </main>
 
