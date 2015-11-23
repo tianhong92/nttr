@@ -1,11 +1,11 @@
 <div class="welcome vcenter row" id="welcome">
-  <div class="col-md-8 col-xs-12 welcome-message text-white">
+  <div class="col-md-7 col-xs-12 welcome-message text-white">
     <h1 class="vmargin-double strong welcome-sitename">Welcome to nttr.</h1>
     <p class="lead vmargin-half">Join <%= @users.count %> other people at nttr: the world's greatest, pithiest and vowellessest microblogging service.
     <p class="lead">Inspired by <%= link_to 'Qwghlm', 'http://baroquecycle.wikia.com/wiki/Qwghlm' %> and <%= link_to 'Twitter', 'https://www.twitter.com' %>.</p>
   </div>
 
-  <div class="col-md-4 col-xs-12 welcome-forms">
+  <div class="col-md-5 col-xs-12 welcome-forms">
     <div class="vmargin-full">
       <%= render partial: 'user_sessions/login', locals: { user_session: @user_session } %>
     </div>
