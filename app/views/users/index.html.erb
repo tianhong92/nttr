@@ -1,29 +1,12 @@
 <%-# Twitter default is to show either your tweets, or the register and login forms. %>
 <% if current_user %>
-
   <%-# Fetch all tweets + tweet-form if logged in. %>
-  <div class="tweets border--thin rounded" id="tweets">
+  <div class="tweets" id="tweets">
     <%= render partial: 'tweets/broadcast', locals: { user: @user, tweet: @user.tweets.build } %>
     <div class="tweet-list">
       <%= render partial: 'tweets/tweet', collection: Tweet.includes(:user).order('created_at desc').all %>
     </div>
   </div>
-
 <% else %>
-
-  <div class="welcome vecenter" id="welcome">
-    <div class="float--left welcome__greeting">
-      <h1 class="welcome__title">Welcome to nttr.</h1>
-      <div class="welcome__messages">
-        <p class="welcome__message">Join <%= @users.count %> other people at nttr, the world's greatest, pithiest and vowellessest microblogging service.</p>
-        <p class="welcome__message">Inspired by <%= link_to 'Qwghlm', 'http://baroquecycle.wikia.com/wiki/Qwghlm' %> and <%= link_to 'Twitter', 'https://www.twitter.com' %>.</p>
-      </div>
-    </div>
-
-    <div class="float--right welcome__forms">
-      <%= render partial: 'user_sessions/login', locals: { user_session: @user_session } %>
-      <%= render partial: 'users/register', locals: { user: @user } %>
-    </div>
-  </div>
-
+    <%= render partial: 'users/welcome' %>
 <% end %>
