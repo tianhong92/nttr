@@ -6,16 +6,16 @@ $(document).ready(function() {
     var broadcast = {
         id: '#new_tweet',
         input: '#tweet_content',
-        counter: '.broadcast__counter',
-        errors: '.broadcast__errors'
+        counter: '.broadcast-counter',
+        errors: '.broadcast-errors'
     }
 
     var tweet = {
         type: '.tweet',
-        content: '.tweet__content',
+        content: '.tweet-content',
         list: '.tweet-list',
-        del: '.tweet__delete',
-        err: 'error--highlight',
+        del: '.tweet-delete',
+        err: 'error-highlight',
         max: 140
     }
 
@@ -31,8 +31,8 @@ $(document).ready(function() {
             counter: '',
             max: tweet.max,
             tolerance: 15,
-            warnClass: 'text--error',
-            dispClass: 'display--none'
+            warnClass: 'text-error',
+            dispClass: 'display-none'
         }, args);
 
         this.on('keyup', function() {
