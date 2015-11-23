@@ -1,23 +1,17 @@
-<div class="welcome__form border--thin register" id="register">
+<div class="register clearfix form-auth" id="register">
   <% if user.errors.any? %>
     <%= render partial: 'shared/errors', locals: { object: user } %>
   <% end %>
 
   <%= form_for user, html: { class: 'form clearfix' } do |form| %>
-    <h2 class="vmargin--half">New to nttr? <span class="text--small text--light">Sign up</span></h2>
-    <fieldset>
-      <%= form.text_field :login, class: 'vmargin--half display--block form--input', placeholder: 'Username' %>
-      <%= form.text_field :nicename, class: 'vmargin--half display--block form--input', placeholder: 'Full Name' %>
-      <%= form.text_field :email, class: 'vmargin--half display--block form--input', placeholder: 'Email' %>
-    </fieldset>
-
-    </fieldset>
-      <%= form.password_field :password, class: 'vmargin--half display--block form--input', placeholder: 'Password' %>
-      <%= form.password_field :password_confirmation, class: 'vmargin--half display--block form--input', placeholder: 'Confirm password' %>
-    </fieldset>
-
-    <fieldset>
-      <%= form.submit 'Sign up for nttr', class: 'button button--submit form--submit float--right' %>
-    </fieldset>
+    <h4 class="vmargin-full">New to nttr? <small>Sign up</small></h4>
+    <div class="form-group">
+      <%= form.text_field :login, class: 'form-control vmargin-half', placeholder: 'Username' %>
+      <%= form.text_field :nicename, class: 'form-control vmargin-half', placeholder: 'Full Name' %>
+      <%= form.text_field :email, class: 'form-control vmargin-half', placeholder: 'Email' %>
+      <%= form.password_field :password, class: 'form-control vmargin-half', placeholder: 'Password' %>
+      <%= form.password_field :password_confirmation, class: 'form-control vmargin-half', placeholder: 'Confirm password' %>
+      <%= form.submit 'Sign up for nttr', class: 'btn btn-warning pull-right text-black' %>
+    </div>
   <% end %>
 </div>

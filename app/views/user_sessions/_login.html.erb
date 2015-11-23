@@ -1,22 +1,25 @@
-<div class="welcome__form border--thin login vmargin--full" id="login">
+<div class="login form-auth" id="login">
   <% if user_session.errors.any? %>
     <%= render partial: 'shared/errors', locals: { object: user_session } %>
   <% end %>
 
   <%= form_for user_session, html: { class: 'clearfix form' } do |form| %>
-    <fieldset>
-      <%= form.text_field :login, class: 'vmargin--half display--block form--input', placeholder: 'Username', autofocus: true %>
-    </fieldset>
+    <div class="form-group vmargin-half">
+      <%= form.text_field :login, class: 'form-control vmargin-half', placeholder: 'Username', autofocus: true %>
+    </div>
 
-    <fieldset>
-      <%= form.password_field :password, class: 'float--left vmargin--half form--input', placeholder: 'Password' %>
-      <%= form.submit'Sign In', class: 'float--right button button--submit form--submit' %>
-    </fieldset>
+    <div class="form-group clearfix vmargin-half">
+      <%-# This form group should be side-by-side. %>
+      <%= form.password_field :password, class: 'form-control pull-left login-password', placeholder: 'Password' %>
+      <%= form.submit'Log in', class: 'btn btn-primary pull-right login-submit' %>
+    </div>
 
-    <fieldset>
-      <%= form.check_box :remember_me, class: 'form-control', checked: true %>
-      <%= form.label :remember_me, 'Remember me', class: 'text--small' %>
-    </fieldset>
+    <div class="form-group vmargin-none">
+      <%= form.label :remember_me, class: 'checkbox-inline' do %>
+        <%= form.check_box :remember_me, class: 'checkbox', checked: true %>
+        <%= 'Remember me' %>
+      <% end %>
+    </div>
   <% end %>
 </div>
 
