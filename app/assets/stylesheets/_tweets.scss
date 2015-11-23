@@ -1,5 +1,9 @@
 @import 'variables';
 
+// 
+// Tweets List
+//
+
 .tweets {
     margin: 0 auto;
 
@@ -7,17 +11,28 @@
         box-sizing: border-box;
         margin: 5%;
     }
-}
 
-.tweet {
-    &-list-wrap {
-        @media screen and (min-width: $screen-md-min) {
-            border-left: 1px solid $btn-default-border;
+    &-headline {
+        padding: $vmargin * 2 $vmargin; 
+    }
+
+    &-wrap {
+        @media screen and (max-width: $screen-md-min) {
+            border: none;
         }
     }
 
+    &-broadcast {
+    }
+}
+
+// 
+// Tweet Messages
+//
+
+.tweet {
     box-sizing: border-box;
-    padding: 1rem;
+    padding: $vpadding;
 
     &:not(:first-child) {
         border-top: solid 0.1rem #ddd;
@@ -28,12 +43,19 @@
     }
 
     &-photo {
-        width: 50px;
+        width: $tweet-photo-width;
     }
 
     &-wrap {
         // Wraps rightside content.
-        width: calc(100% - 50px - #{$vmargin})
+        width: calc(100% - #{$tweet-photo-width} - #{$vmargin});
+    }
+
+    &-profile-link {
+        &:after {
+            // '&nbsp;&nbsp'
+            content: '\00a0';
+        }
     }
 
     &-datetime {
@@ -44,10 +66,4 @@
             // content: '\0020\00B7';
         }
     }
-}
-
-.broadcast {
-    box-sizing: border-box;
-    padding: 1rem;
-
 }
