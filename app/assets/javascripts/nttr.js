@@ -70,7 +70,7 @@ $(document).ready(function() {
     $.fn.maxTweetLength = function(maxLength, element) {
         function check() {
             return !!$(element).val().replace(/(\r|\n|\s|\t)/g, '') 
-                && $(element).val().length <= maxLength;
+                   && $(element).val().length <= maxLength;
         }
        
         this.on('submit', check);
