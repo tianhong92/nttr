@@ -2,9 +2,8 @@
 
 .tweets {
     margin: 0 auto;
-    max-width: 768px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $screen-md-min) {
         box-sizing: border-box;
         margin: 5%;
     }
@@ -22,16 +21,16 @@
         background-color: #f7f7f7;
     }
 
-    &__photo {
+    &-photo {
         width: 50px;
     }
 
-    &__wrap {
+    &-wrap {
         // Wraps rightside content.
         width: calc(100% - 50px - #{$vmargin})
     }
 
-    &__datetime {
+    &-datetime {
         padding-left: 0.1rem;
 
         &:before {
@@ -42,19 +41,7 @@
 }
 
 .broadcast {
-    background: palette(solid);
     box-sizing: border-box;
     padding: 1rem;
 
-    &__errors {
-        color: #fff;
-    }
-
-    &__counter {
-        color: #fff;
-    }
-}
-
-.adorable-avatar {
-    border-radius: 50%;
 }
