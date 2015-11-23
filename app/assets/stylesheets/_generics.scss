@@ -1,0 +1,62 @@
+@import 'variables';
+
+.display {
+    &-block {
+        display: block;
+        width: 100%;
+    }
+
+    &-inline-block {
+        display: inline-block;
+    }
+
+    &-inline {
+        display: inline;
+    }
+
+    &-none {
+        display: none;
+    }
+}
+
+.vmargin {
+    &-full {
+        margin-bottom: $vmargin;
+    }
+
+    &-half {
+        margin-bottom: $vmargin * 0.5;
+    }
+
+    &-quarter {
+        margin-bottom: $vmargin * 0.25;
+    }
+}
+
+.text {
+    &-white {
+        color: #fff;
+    }
+}
+
+.background {
+    &-white {
+        background-color: #fff;
+    }
+
+    &-light {
+        font-weight: normal;
+    }
+
+    &-bold {
+        font-weight: bold;
+    }
+
+    &-small {
+        font-size: 75%;
+    }
+
+    &-error {
+        color: palette(error);
+    }
+}

@@ -1,0 +1,41 @@
+@import 'variables';
+
+.welcome {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 5%;
+
+    &-message {
+        @media screen and (min-width: $screen-sm-min) {
+            box-sizing: border-box;
+            padding: $vmargin $vmargin $vmargin 0;
+            width: calc(#{$welcome-message-width} - #{$vmargin});
+        } 
+    }
+
+    &-forms {
+        @media screen and (min-width: $screen-sm-min) {
+            width: calc(100% - #{$welcome-message-width});
+        }
+    }
+
+    &-forms, &-message {
+        @media screen and (max-width: $screen-sm-min) {
+            float: none !important;
+        }
+    }
+
+    &-form {
+        background-color: #fff;
+        border: 1px solid $btn-default-border;
+        border-radius: $border-radius-base;
+        box-sizing: border-box;
+        padding: $vmargin;
+    }
+}
+
+.no-session {
+    // Pleasent greeter background.
+    background: center/cover no-repeat image-url('background-2.jpg');
+    min-height: 100vh;
+}
