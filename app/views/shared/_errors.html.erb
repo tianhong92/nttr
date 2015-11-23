@@ -1,5 +1,5 @@
-<div class="errors vmargin--full errors--flash">
-  <ul class="errors__list">
+<div class="errors vmargin-full errors-flash">
+  <ul class="errors-list">
     <% object.errors.each do |type,error| %>
       <%= render partial: 'shared/error', locals: { type: type, error: error } %>
     <% end %>
