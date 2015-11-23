@@ -8,7 +8,6 @@
     <p class="tweet-body">
       <%-# Tweet authot information. %>
       <%= content_tag :span, link_to(tweet.user.login, user_path(tweet.user), class: 'text-bold tweet-profile-link'), class: 'tweet-user pull-left' %>
-      &nbsp;
       <%= content_tag :span, tweet.content, class: 'tweet-content vmargin-half' %>
     </p>
 
