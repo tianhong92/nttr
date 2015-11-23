@@ -123,4 +123,52 @@ $(document).ready(function() {
         $(broadcast.errors).append($(xhr.responseText));
         console.log(xhr);
     });
+
+    //
+    // TODO: FIXME
+    //
+
+    $.fn.fixedwidget = function(args) {
+        function fixOnScroll() {
+            // Set fixed state.
+            var scrolled = $(this).scrollTop() + args.tolerance > $self.parent().offset().top;
+
+            if (scrolled) {
+                $self.css({
+                    position: 'fixed',
+                    top: args.tolerance
+                });
+            } else {
+                $self.css({
+                    position: 'static',
+                    top: 0
+                });
+            }
+        }
+
+        function determineScrollState() {
+            if ($(this).width() < args.minWidth) {
+                $(this).off('scroll', fixOnScroll);
+
+                $self.css({
+                    position: 'static',
+                    width: '100%'
+                });
+            } else {
+                $(this).on('scroll', fixOnScroll);
+                $self.css('width', $self.parent().width());
+            }
+        }
+
+        args = $.extend({}, {
+            tolerance: 90,
+            minWidth: 768
+        }, args);
+
+        var $self = this;
+        $(window).on('resize', determineScrollState).trigger('resize');
+        return this;
+    }
+
+    $('#broadcast').fixedwidget();
 });
