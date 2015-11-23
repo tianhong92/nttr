@@ -12,7 +12,7 @@ $palette: (
 }
 
 @mixin vcenter($x, $y) {
-    @media screen and (min-width: $screen-sm-min) {
+    @media screen and (min-width: $screen-md-min) {
         left: $x;
         position: absolute;
         top: $y;
