@@ -1,15 +1,8 @@
 @import 'variables';
 
-.login {
-    &-password {
-        // 100% - button width - ($vmargin * 0.75)
-        width: calc(100% - #{$login-submit-width} - #{$vmargin * 0.75});
-    }
-
-    &-submit {
-        width: $login-submit-width;
-    }
-}
+//
+// Form Elements Shared Rules
+//
 
 .form {
     &-auth {
@@ -27,5 +20,33 @@
         @media screen and (min-width: $screen-sm-min) {
             padding: 5% 15%;
         }
+    }
+}
+
+//
+// Site Login Form
+//
+
+.login {
+    &-password {
+        // 100% - button width - ($vmargin * 0.75)
+        width: calc(100% - #{$login-submit-width} - #{$vmargin * 0.75});
+    }
+
+    &-submit {
+        width: $login-submit-width;
+    }
+}
+
+//
+// Tweet Broadcast Form
+//
+
+.broadcast {
+    box-sizing: border-box;
+    padding: 1rem;
+
+    &:empty {
+        display: none;
     }
 }
