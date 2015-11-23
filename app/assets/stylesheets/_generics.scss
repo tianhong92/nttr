@@ -20,6 +20,10 @@
 }
 
 .vmargin {
+    &-none {
+        margin-bottom: 0;
+    }
+
     &-full {
         margin-bottom: $vmargin;
     }
@@ -31,11 +35,24 @@
     &-quarter {
         margin-bottom: $vmargin * 0.25;
     }
+
+    &-double {
+        margin-bottom: $vmargin * 2;
+    }
+}
+
+.vcenter {
+    position: relative;
+    top: 20vh;
 }
 
 .text {
     &-white {
         color: #fff;
+    }
+
+    &-black {
+        color: #000;
     }
 }
 
