@@ -41,6 +41,28 @@
     }
 }
 
+.vpadding {
+    &-none {
+        padding-bottom: 0;
+    }
+
+    &-full {
+        padding-bottom: $vpadding;
+    }
+
+    &-half {
+        padding-bottom: $vpadding * 0.5;
+    }
+
+    &-quarter {
+        padding-bottom: $vpadding * 0.25;
+    }
+
+    &-double {
+        padding-bottom: $vpadding * 2;
+    }
+}
+
 .vcenter {
     position: relative;
     top: 20vh;
@@ -53,6 +75,26 @@
 
     &-black {
         color: #000;
+    }
+}
+
+.border { 
+    border: 1px solid $btn-default-border;
+
+    &-top {
+        border-top: 1px solid $btn-default-border;
+    }
+
+    &-right {
+        border-right: 1px solid $btn-default-border;
+    }
+
+    &-bottom {
+        border-bottom: 1px solid $btn-default-border;
+    }
+
+    &-left {
+        border-left: 1px solid $btn-default-border;
     }
 }
 
