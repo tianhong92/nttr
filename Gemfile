@@ -38,10 +38,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Authlogic for session authentication.
 gem 'authlogic', '~> 3.4.6'
-# Generate documentation.
-gem 'yard', '~> 0.8.7.6'
-# Bootstrap and Autoprefixer.
-gem 'normalize-rails'
+# Boostrap
+gem 'bootstrap-sass', '~> 3.3.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
