@@ -8,7 +8,7 @@
 </head>
 <body class="<%= current_user_session ? 'session' : 'no-session' %>">
   <% if current_user_session %>
-    <%= render partial: 'layouts/actionbar' %>
+    <%-# render partial: 'layouts/actionbar' %>
   <% else %>
     <%-# Not logged in stuff here. %>
   <% end %>
