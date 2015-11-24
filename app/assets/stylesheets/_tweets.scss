@@ -5,7 +5,7 @@
 //
 
 .tweets {
-    margin: 0 auto;
+    margin: 3rem auto;
 
     @media screen and (max-width: $screen-md-min) {
         box-sizing: border-box;
@@ -21,10 +21,8 @@
             border: none;
         }
     }
-
-    &-broadcast {
-    }
 }
+
 
 // 
 // Tweet Messages
