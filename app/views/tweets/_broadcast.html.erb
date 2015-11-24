@@ -1,10 +1,9 @@
 <div class="broadcast" id="broadcast">
   <div class="broadcast-errors errors vmargin-double"></div>
   <%= form_for [user, user.tweets.build], html: { class: 'form' }, remote: true do |form| %>
-    <div class="form-group vmargin-half">
+    <div class="form-group vmargin-full">
       <%= form.text_area :content, placeholder: 'Do you want to nttr?', maxlength: 140, class: 'broadcast-content form-control', tabindex: 1 %>
     </div>
-
     <div class="form-group clearfix">
       <%-# Tweet length counter. %>
       <span class="broadcast-counter display-none">0</span>
