@@ -13,6 +13,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = 'Login successful!'
       redirect_to root_url
     else
+      Rails.logger.error @user_session.errors.to_yaml
       render template: 'user_sessions/new', locals: { user_session: @user_session }
     end
   end
