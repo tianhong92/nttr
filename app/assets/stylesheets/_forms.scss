@@ -44,14 +44,6 @@
 
 .broadcast {
     box-sizing: border-box;
-    padding: 1rem;
-
-    @media screen and (min-width: $screen-md-min) {
-        // Element width is set via JavaScript above $screen-md-min (992px).
-        display: none;
-        position: fixed;
-        top: 90px;
-    }
 
     &-errors:empty {
         display: none;

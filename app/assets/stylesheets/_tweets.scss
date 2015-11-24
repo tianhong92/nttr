@@ -21,6 +21,24 @@
             border: none;
         }
     }
+
+    &-usercard {
+        border-radius: $border-radius-base;
+        box-sizing: border-box;
+
+        @media screen and (min-width: $screen-md-min) {
+            // Element width is set via JavaScript above $screen-md-min (992px).
+            display: none;
+            position: fixed;
+            top: 90px;
+        }
+    }
+
+    &-user {
+        background: #fff;
+        border-radius: inherit;
+        box-sizing: inherit;
+    }
 }
 
 
