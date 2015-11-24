@@ -2,8 +2,17 @@
 <% if current_user %>
   <%-# Fetch all tweets + tweet-form if logged in. %>
   <div class="tweets row" id="tweets">
-    <div class="tweets-broadcast col-md-4 col-sm-12">
-      <%= render partial: 'tweets/broadcast', locals: { user: @user, tweet: @user.tweets.build } %>
+    <div class="tweets-sidebar col-md-4 col-sm-12">
+      <div class="tweets-usercard" id="usercard">
+        <div class="tweets-user clearfix" id="user-<%= @user.id %>">
+          <p class="pull-right vmargin-full">
+            <%-# TODO: Expand this card and move to a partial. %>
+            <%= link_to @user.nicename, user_path(@user) %>
+            <%= link_to 'logout', '/logout', method: :delete %>
+          </p>
+        </div>
+        <%= render partial: 'tweets/broadcast', locals: { user: @user, tweet: @user.tweets.build } %>
+      </div>
     </div>
     <div class="tweets-wrap border-left col-md-8 col-sm-12">
       <h1 class="vmargin-full border-bottom tweets-headline">Nttrs</h1>
