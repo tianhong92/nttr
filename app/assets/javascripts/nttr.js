@@ -125,53 +125,29 @@ $(document).ready(function() {
     });
 
     //
-    // Fix Sidebar Element on Page Scroll
+    // Resize Sidebar User Card
     //
 
-    $.fn.fixedwidget = function(args) {
-        //
-        // Fix Element on Scroll
-        //
+    $.fn.userCardWidth = function(minWidth) {
+        function resizeUserCard() {
+            var belowMin = $(this).width() < minWidth;
+            $self.css('width', belowMin ? '100%' : $self.parent().width());
 
-        function fixOnScroll() {
-            var scrolled = $(this).scrollTop() 
-                + args.tolerance > $self.parent().offset().top;
-
-            if (scrolled) {
-                $self.css({ position: 'fixed', top: args.tolerance });
-            } else {
-                $self.css({ position: 'static', top: 0 });
+            if (!$self.is(':visible')) {
+                // Element is hidden by default to avoid FOUC.
+                $self.fadeIn(animationTime);
             }
         }
 
-        //
-        // Determine Whether $self should fix in plaace.
-        //
-
-        function determineScrollState() {
-            if ($(this).width() < args.minWidth) {
-                $(this).off('scroll', fixOnScroll);
-
-                $self.css({
-                    position: 'static',
-                    width: '100%'
-                });
-            } else {
-                $(this).on('scroll', fixOnScroll);
-                $self.css('width', $self.parent().width());
-            }
-        }
-
-        args = $.extend({}, {
-            tolerance: 90,
-            // Bootstrap medium-> small breakpoint.
-            minWidth: 992
-        }, args);
-
+        minWidth = minWidth || 992;
         var $self = this;
-        $(window).on('resize', determineScrollState).trigger('resize');
+
+        $(window)
+            .on('resize', resizeUserCard)
+            .trigger('resize');
+
         return this;
     }
 
-    $('#broadcast').fixedwidget();
+    $('#broadcast').userCardWidth(992);
 });
