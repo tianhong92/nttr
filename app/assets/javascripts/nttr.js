@@ -149,5 +149,5 @@ $(document).ready(function() {
         return this;
     }
 
-    $('#broadcast').userCardWidth(992);
+    $('#usercard').userCardWidth(992);
 });
