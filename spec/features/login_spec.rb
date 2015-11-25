@@ -1,6 +1,17 @@
 require 'spec_helper'
 require 'rails_helper'
 
+def create_user(name = 'birdmen')
+  # SKRAW-W-W-W-W!
+  @user = User.create(
+    login: name,
+    email: "angry.#{name}@bhalash.com",
+    nicename: "Angry #{name.capitalize}",
+    password: "ilove#{name.upcase}",
+    password_confirmation: "ilove#{name.upcase}"
+  )
+end
+
 describe 'When viewing Nttr' do
   # RSpec has test syntax. Capybara only extends this to web page features.
   # Cheat sheet for Capybara expect and general syntax: 
@@ -68,7 +79,7 @@ context 'When logged into Nttr' do
   # See: spec/rails_helper.rb for how AuthLogic was initialized.
   setup :activate_authlogic 
 
-  let!(:standard_user) do
+  let!(:user) do
     # Link: https://goo.gl/9UzXG6
     #
     # The difference between before and let is that before is called once, 
@@ -79,14 +90,7 @@ context 'When logged into Nttr' do
     # controller.
     #
     # /let/, however, is called once and cached.
-    @user = User.create(
-      # I use slightly different fields from my user than in the email.
-      login: 'pony',
-      email: 'pony.lover@sonru.com',
-      nicename: 'Pony Lover',
-      password: 'iloveponies',
-      password_confirmation: 'iloveponies'
-    )
+    create_user('squid')
   end
 
   # let!(:existing_user) do
@@ -98,13 +102,13 @@ context 'When logged into Nttr' do
   it 'test user should exist' do
     # This is tautological..circular: If the user exists, I check if the user
     # exists. It's still a nice example of context. Moving /on/
-    expect(User.where(email: 'pony.lover@sonru.com')).to exist
+    expect(User.where(email: user.email)).to exist
   end
 
   it 'existing user name should exist' do
     # Another tautological test. I declare the @user variable, and test the 
     # user's ID here.
-    expect(@user.nicename).to eq('Pony Lover')
+    expect(@user.nicename).to eq(user.nicename)
   end
 
   it 'persistence token should exist' do
@@ -115,15 +119,8 @@ end
 context 'When testing Nttr login' do
   setup :activate_authlogic 
 
-  let!(:standard_user) do
-    # TODO: Put to helper method.
-    @user = User.create(
-      login: 'pony',
-      email: 'pony.lover@sonru.com',
-      nicename: 'Pony Lover',
-      password: 'iloveponies',
-      password_confirmation: 'iloveponies'
-    )
+  let(:user) do
+    create_user('ladder')
   end
 
   it 'user session should be created' do
@@ -132,12 +129,14 @@ context 'When testing Nttr login' do
     visit root_url
 
     within '#login' do
-      fill_in 'Username or email', with: 'pony.lover@sonru.com'
-      fill_in 'Password', with: 'iloveponies'
+      fill_in 'Username or email', with: user.email
+      fill_in 'Password', with: user.password
       click_button 'Log in'
     end
 
-    expect(page).to have_content 'Nttrs'
+    within '#tweets' do
+      expect(page).to have_content 'Nttrs'
+    end
   end
 
   # Example of compact syntax.
