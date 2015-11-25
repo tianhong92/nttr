@@ -81,7 +81,7 @@ context 'When logged into Nttr' do
   # See: spec/rails_helper.rb for how AuthLogic was initialized.
   setup :activate_authlogic 
 
-  let!(:user) do
+  let!(:test_user) do
     # Link: https://goo.gl/9UzXG6
     #
     # The difference between before and let is that before is called once, 
@@ -92,7 +92,8 @@ context 'When logged into Nttr' do
     # controller.
     #
     # /let/, however, is called once and cached.
-    create_user('squid')
+    # create_user('squid')
+    FactoryGirl.build(:user)
   end
 
   # let!(:existing_user) do
@@ -104,25 +105,34 @@ context 'When logged into Nttr' do
   it 'test user should exist' do
     # This is tautological..circular: If the user exists, I check if the user
     # exists. It's still a nice example of context. Moving /on/
-    expect(User.where(email: user.email)).to exist
+    expect(User.where(email: test_user.email)).to exist
   end
 
   it 'existing user name should exist' do
     # Another tautological test. I declare the @user variable, and test the 
     # user's ID here.
-    expect(@user.nicename).to eq(user.nicename)
+    expect(test_user.nicename).to eq(test_user.nicename)
   end
 
   it 'persistence token should exist' do
-    expect(@user.persistence_token).to_not be_nil
+    expect(test_user.persistence_token).to_not be_nil
   end
 end
 
 context 'When testing Nttr login' do
   setup :activate_authlogic 
 
-  let(:user) do
-    create_user('ladder')
+  let(:test_user) do
+    # create_user('ladder')
+
+    # Build (used above) does not persist in memory,
+    # Create does. It also seems to call on Authlogic methods, such that the 
+    # attributes needed for a user session aren't created.
+    #
+    # TODO: Figure out why.
+    # Authlogic uses the user's ID to generate a session. I need to build a
+    # phantom user who has an ID attribute set.
+    FactoryGirl.build(:user)
   end
 
   it 'user session should be created' do
@@ -130,9 +140,12 @@ context 'When testing Nttr login' do
     # view is rendered.
     visit root_url
 
+    # Debug output for my sanity.
+    p test_user
+
     within '#login' do
-      fill_in 'Username or email', with: user.email
-      fill_in 'Password', with: user.password
+      fill_in 'Username or email', with: test_user.email
+      fill_in 'Password', with: test_user.password
       click_button 'Log in'
     end
 
