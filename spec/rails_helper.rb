@@ -8,8 +8,10 @@ require 'rspec/rails'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  # Load Capybara
   require 'capybara/rspec'
 
+  # Load AuthLogic
   require 'authlogic/test_case'
   config.include Authlogic::TestCase
 
