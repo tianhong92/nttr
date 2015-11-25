@@ -38,6 +38,13 @@ describe 'When viewing Nttr' do
 
       # Will be flagged as PENDING: Not yet implemented
       it 'and find the registration form'
+
+      it 'should have ponies' do
+        # Deliberate failing test.
+        within('#register') do
+          expect(page).to have_content 'PONIES'
+        end
+      end
     end
 
     describe 'examine CSS' do
@@ -103,11 +110,6 @@ context 'When logged into Nttr' do
   it 'persistence token should exist' do
     expect(@user.persistence_token).to_not be_nil
   end
-
-  # it 'broadcast form should be present' do
-  #   UserSession.create(@user)
-  #   expect(page).to have_content 'Nttrs'
-  # end
 end
 
 context 'When testing Nttr login' do
@@ -137,4 +139,7 @@ context 'When testing Nttr login' do
 
     expect(page).to have_content 'Nttrs'
   end
+
+  # Example of compact syntax.
+  it { expect(1).to equal(1) }
 end
