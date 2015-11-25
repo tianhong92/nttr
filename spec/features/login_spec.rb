@@ -26,7 +26,10 @@ describe 'When viewing Nttr' do
       # Nested tests.
       
       it 'and find the welcome title' do
-        expect(page).to have_content 'Welcome to nttr.'
+        within '#welcome' do
+          # Within specifies a CSS3 selector.
+          expect(page).to have_content 'Welcome to nttr.'
+        end
       end
 
       it 'and find the login form' do
@@ -50,14 +53,14 @@ describe 'When viewing Nttr' do
 end
 
 context 'When logged into Nttr' do
+  # difference between the two methods. Think of it in terms of plain 
+  # language: You /describe/ a set of tests, you /give context/ for a set of
+  # tests.
+  
   # Setup can only be called from the top of a context or describe block.
   # See: spec/rails_helper.rb for how AuthLogic was initialized.
   setup :activate_authlogic 
 
-  # 'context' and 'describe' are synonymous: There is no programmatic
-  # difference between the two methods. Think of it in terms of plain 
-  # language: You /describe/ a set of tests, you /give context/ for a set of
-  # tests.
   let!(:standard_user) do
     # Link: https://goo.gl/9UzXG6
     #
@@ -82,12 +85,8 @@ context 'When logged into Nttr' do
   # let!(:existing_user) do
   #   # Fetch existing user. Not used because it duplicates the above.
   #   @user = User.find_by_email('pony.lover@sonru.com')
+  #   UserSession.create(@user)
   # end
-
-  before(:each) do
-    # UserSession.create(@user)
-    # expect(@user_session).to exist
-  end
 
   it 'test user should exist' do
     # This is tautological..circular: If the user exists, I check if the user
@@ -105,8 +104,37 @@ context 'When logged into Nttr' do
     expect(@user.persistence_token).to_not be_nil
   end
 
-  it 'broadcast form should be present' do
+  # it 'broadcast form should be present' do
+  #   UserSession.create(@user)
+  #   expect(page).to have_content 'Nttrs'
+  # end
+end
+
+context 'When testing Nttr login' do
+  setup :activate_authlogic 
+
+  let!(:standard_user) do
+    # TODO: Put to helper method.
+    @user = User.create(
+      login: 'pony',
+      email: 'pony.lover@sonru.com',
+      nicename: 'Pony Lover',
+      password: 'iloveponies',
+      password_confirmation: 'iloveponies'
+    )
+  end
+
+  it 'user session should be created' do
+    # This test creates a user session and establishes that the 'logged in'
+    # view is rendered.
     visit root_url
+
+    within '#login' do
+      fill_in 'Username or email', with: 'pony.lover@sonru.com'
+      fill_in 'Password', with: 'iloveponies'
+      click_button 'Log in'
+    end
+
     expect(page).to have_content 'Nttrs'
   end
 end
