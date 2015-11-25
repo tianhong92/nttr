@@ -50,6 +50,10 @@ describe 'When viewing Nttr' do
 end
 
 context 'When logged into Nttr' do
+  # Setup can only be called from the top of a context or describe block.
+  # See: spec/rails_helper.rb for how AuthLogic was initialized.
+  setup :activate_authlogic 
+
   # 'context' and 'describe' are synonymous: There is no programmatic
   # difference between the two methods. Think of it in terms of plain 
   # language: You /describe/ a set of tests, you /give context/ for a set of
@@ -80,8 +84,9 @@ context 'When logged into Nttr' do
   #   @user = User.find_by_email('pony.lover@sonru.com')
   # end
 
-  before(:all) do
-    UserSession.create(@user)
+  before(:each) do
+    # UserSession.create(@user)
+    # expect(@user_session).to exist
   end
 
   it 'test user should exist' do
@@ -98,5 +103,10 @@ context 'When logged into Nttr' do
 
   it 'persistence token should exist' do
     expect(@user.persistence_token).to_not be_nil
+  end
+
+  it 'broadcast form should be present' do
+    visit root_url
+    expect(page).to have_content 'Nttrs'
   end
 end
