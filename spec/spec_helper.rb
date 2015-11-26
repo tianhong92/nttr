@@ -7,3 +7,9 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 end
+
+def login(user)
+  session = UserSession.create login: user.login, password: user.password
+  session.save 
+  session
+end
