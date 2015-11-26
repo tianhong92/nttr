@@ -6,6 +6,10 @@ class UsersController < ApplicationController
   before_action :user_id, only: [:edit, :update, :destroy, :show]
   before_action :create_user, only: [:create]
 
+  # Totally debug.
+  # The gist here is that you must be logged in before you may view a user's profile.
+  # before_filter :require_session, only: :show
+
   # Create MD5 of the user's login for fetching programmatic avatars.
   before_action :login_md5, only: [:create, :update]
 
