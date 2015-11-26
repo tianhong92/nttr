@@ -21,5 +21,8 @@ class ApplicationController < ActionController::Base
     end
 
     def require_session
+      unless current_user_session
+        redirect_to new_user_session_url
+      end
     end
 end
