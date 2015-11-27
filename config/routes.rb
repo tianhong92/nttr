@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  default_url_options host: 'http://localhost:3000'
+  # default_url_options host: 'http://localhost:3000'
 
   resources :users do 
     # Wild tweets can only be created, read and destroyed, not changed.
