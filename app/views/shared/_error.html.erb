@@ -1,3 +1,3 @@
-<li class="error--<%= type %> error errors__message">
-  <%= content_tag :span, error, class: 'error__string' %>
+<li class="error-type-<%= type.downcase %> error errors-message">
+  <%= content_tag :span, error, class: "error-message" %>
 </li>
