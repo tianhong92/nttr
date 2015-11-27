@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+  default_url_options host: 'http://localhost:3000'
+
   resources :users do 
     # Wild tweets can only be created, read and destroyed, not changed.
-    # resources :tweets, only: [:new, :create, :destroy, :show, :index, :delete] do 
-    resources :tweets do
+    resources :tweets, except: [:edit, :update] do
       get 'delete'
+
+      collection do
+        get 'tweets'
+      end
     end
   end
 
