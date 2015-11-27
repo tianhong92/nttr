@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  require 'digest/md5'
   include ApplicationHelper
 
   before_action :all_users, only: [:index, :create, :update]
@@ -9,9 +8,6 @@ class UsersController < ApplicationController
   # Totally debug.
   # The gist here is that you must be logged in before you may view a user's profile.
   # before_filter :require_session, only: :show
-
-  # Create MD5 of the user's login for fetching programmatic avatars.
-  before_action :login_md5, only: [:create, :update]
 
   def index
     if current_user
@@ -62,9 +58,5 @@ class UsersController < ApplicationController
 
     def create_user
       @user = User.new(user_params)
-    end
-
-    def login_md5
-      @user.login_md5 = Digest::MD5.hexdigest(@user.login)
     end
 end
