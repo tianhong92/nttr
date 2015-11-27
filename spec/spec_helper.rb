@@ -8,8 +8,14 @@ RSpec.configure do |config|
   end
 end
 
-def login(user)
+def login_as_user(user)
   session = UserSession.create login: user.login, password: user.password
   session.save 
   session
+end
+
+def test_as_user
+  @user = FactoryGirl.build :user
+  @session = login_as_user @user
+  yield
 end
