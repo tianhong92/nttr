@@ -17,11 +17,11 @@
 .errors {
     padding: 1rem 0;
 
-    &__list {
+    &-list {
         padding: 0 0.5rem;
     }
 
-    &__message {
+    &-message {
         display: inline-block; 
 
         &:first-letter {
@@ -29,7 +29,7 @@
         }
     }
 
-    &--flash {
+    &-flash {
         animation-name: error-flash;
         animation-duration: 1s;
     }
