@@ -133,26 +133,41 @@ context 'When testing Nttr login' do
   # tests. This line will throw an error.
   # p test_user
   
-  before(:each) do
+  # before(:each) do
+  #   UserSession.create(test_user)
+  # end
+
+  let(:session) do
     UserSession.create(test_user)
   end
 
   it 'user should exist' do
-    p test_user
+    # p test_user
     expect(test_user).not_to be_falsey
   end
 
   it 'the login form should work' do
     visit root_url
+    # expect(page).to have_content 'Nttrs'
 
-    # within '#login' do
-    #   fill_in 'Username or email', with: test_user.email
-    #   fill_in 'Password', with: test_user.password
-    #   click_button 'Log in'
-    # end
+    within '#login' do
+      fill_in 'Username or email', with: test_user.email
+      fill_in 'Password', with: test_user.password
+      click_button 'Log in'
+    end
 
     within '#tweets' do
       expect(page).to have_content 'Nttrs'
+    end
+  end
+end
+
+context 'With a yielded block' do
+  setup :activate_authlogic 
+
+  it 'should visit the index' do
+    test_as_user do
+      visit root_url
     end
   end
 end
