@@ -8,13 +8,12 @@ class TweetsController < ApplicationController
   # Specific tweet.
   before_action :tweet_id, only: [:destroy, :show]
   # Redirect to home upon a new form or update action.
-  before_action :tweets_redirect, only: [:new]
 
   def show
   end
 
   def new
-    # No point in a separate form.
+    @user = User.find(current_user.id)
   end
 
   def index
@@ -49,13 +48,6 @@ class TweetsController < ApplicationController
   private 
     def tweet_params
       params.require(:tweet).permit(:content)
-    end
-
-    def create_tweet
-    end
-
-    def tweets_redirect
-      redirect_to tweets_path
     end
 
     def tweet_id
