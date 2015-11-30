@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   # Some validation messages have been logalized at:
   # config/locales/en.yml
   
-  validates_format_of :password, with: /\A3\z/
+  # I lost two hours of my life to this line. :|
+  # validates_format_of :password, with: /\A3\z/
 
   acts_as_authentic do |opts|
     opts.merge_validates_length_of_password_field_options({ 
