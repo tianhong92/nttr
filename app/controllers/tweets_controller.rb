@@ -34,11 +34,11 @@ class TweetsController < ApplicationController
   end
 
   def destroy
-    @tweet.destroy
-
-    render json: {
-      status: 200
-    }
+    if current_user.id == @tweet.user.id && @tweet.destroy
+      render json: { status: 200 }
+    else 
+      render partial: 'error', locals: { tweet: @tweet }, status: 422
+    end
   end
 
   private 
