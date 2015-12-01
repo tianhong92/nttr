@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  include TweetsHelper
+  before_filter :require_session, except: [:index, :show]
 
   # All tweets.
   before_action :all_tweets, only: [:index, :create]
@@ -9,6 +9,9 @@ class TweetsController < ApplicationController
   before_action :tweet_id, only: [:destroy, :show]
   # Redirect to home upon a new form or update action.
 
+  def index
+  end
+
   def show
   end
 
@@ -16,15 +19,8 @@ class TweetsController < ApplicationController
     @user = User.find(current_user.id)
   end
 
-  def index
-  end
-
   def create
-    if current_user
-      # Question: Is this the correct manner?
-      @user = User.find(current_user.id)
-    end
-
+    @user ||= User.find(current_user.id)
     @tweet = @user.tweets.create(tweet_params)
 
     if @tweet.save 
