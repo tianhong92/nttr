@@ -1,6 +1,5 @@
 class UserSessionsController < ApplicationController
-  # before_filter :require_no_user, only: [:new, :create]
-  # before_filter :require_user, only: :destroy
+  before_filter :require_session, only: [:edit, :update, :destroy]
 
   def new
     @user_session = UserSession.new
@@ -14,19 +13,21 @@ class UserSessionsController < ApplicationController
       redirect_to root_url
     else
       Rails.logger.error @user_session.errors.to_yaml
-      render template: 'user_sessions/new', locals: { user_session: @user_session }
+      render 'new'
     end
   end
 
   def destroy
     current_user_session.destroy
     flash[:notice] = 'Logout successful!'
-    # redirect_back_or_default new_user_session_path
     redirect_to root_url
   end
 
   private 
     def user_session_params
-      params.require(:user_session).permit(:login, :password)
+      params.require(:user_session).permit(
+        :login,
+        :password
+      )
     end
 end
