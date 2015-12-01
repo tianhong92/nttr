@@ -21,9 +21,7 @@
       </span>
     </p>
 
-    <% if current_user.id == tweet.user.id %>
-      <%-# Tweet delete link. %>
-      <%-# FIXME TODO: There ARE better ways to authenticate this. Implement them! %>
+    <% if current_user && current_user.id == tweet.user.id %>
       <span class="tweet-delete pull-right"><%= link_to 'Delete', user_tweet_path(tweet.user.id, tweet.id), method: :delete, remote: true %></span>
     <% end %>
   </div>
