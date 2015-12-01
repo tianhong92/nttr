@@ -5,21 +5,39 @@ class User < ActiveRecord::Base
   # Some validation messages have been logalized at:
   # config/locales/en.yml
   
-  # I lost two hours of my life to this line. :|
-  # validates_format_of :password, with: /\A3\z/
+  validates :login,
+    presence: true,
+    length: {
+      within: 6..20,
+      too_short: 'Usename must be at least 6 characters long.',
+      too_long: 'Username may be no more than 20 characters long.'
+    }
 
-  acts_as_authentic do |opts|
-    opts.merge_validates_length_of_password_field_options({ 
-      minimum: 8,
-      message: 'Password must be at least 8 characters long.'
-    })
+  validates :password,
+    presence: true,
+    length: {
+      within: 8..50,
+      too_short: 'Password must be at least 8 characters long.',
+      too_long: 'Password may be no more than 50 characters long.'
+    },
+    format: {
+      # I lost two hours of my life to this line. :|
+      # validates_format_of :password, with: /\A3\z/
+      with: /\A[A-Za-z]\w+/,
+      message: 'Username must begin with a letter and contain only letters, underscores or numbers.'
+    }
 
-    opts.merge_validates_length_of_login_field_options({
-      minimum: 6,
-      message: 'Username must be at least 6 characters long.'
-    })
+  validates_confirmation_of :password,
+    message: 'Password confirmation does not match the password.'
 
-    opts.merge_validates_format_of_email_field_options({
+  validates :email,
+    presence: true,
+    length: {
+      within: 6..40,
+      too_short: 'Email must be at least 6 characters long.',
+      too_long: 'Email may be no more thna 40 characters long.'
+    },
+    format: {
       # I've been through this in practice. Email regex is a nightmare unless
       # you KISS. This enforces *at least* a@b.c
       # 
@@ -28,9 +46,8 @@ class User < ActiveRecord::Base
       # See: http://davidcel.is/posts/stop-validating-email-addresses-with-regex
       # See: https://regex101.com/r/jS2rV9/1
       with: /\A.+@.+\..+\z/,
-      message: 'Your email must be in the format of foo@bar.tld.'
-    })
-  end
+      message: 'Email must be in the format of foo@bar.tld.'
+    }
 
   def to_param
     login
