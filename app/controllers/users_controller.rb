@@ -1,38 +1,31 @@
 class UsersController < ApplicationController
-  include ApplicationHelper
+  before_filter :require_session, only: [:edit, :update, :destroy]
 
   before_action :all_users, only: [:index, :create, :update]
   before_action :user_id, only: [:edit, :update, :destroy, :show]
-  before_action :create_user, only: [:create]
-
-  # Totally debug.
-  # The gist here is that you must be logged in before you may view a user's profile.
-  # before_filter :require_session, only: :show
 
   def index
-    if current_user
-      # Question: Is this the correct manner?
-      @user = User.find(current_user.id)
-    else 
-      @user = User.new
-    end
+    @user = current_user ? User.find(current_user.id) : User.new
   end
+
+  def show 
+  end 
 
   def new
       @user = User.new
   end
 
   def create
+    @user = User.new(user_params)
+
     if @user.save
       redirect_to root_url
       flash[:notice] = 'Success!'
     else 
-      render template: 'users/new', locals: { user: @user }
+      # Rendering an action takes in the whole template.
+      render 'new'
     end
   end
-
-  def show 
-  end 
 
   def edit
   end
@@ -40,12 +33,20 @@ class UsersController < ApplicationController
   def update
   end
 
-  def destory
+  def destroy
+    @user.destroy
+    redirect_to root_url
   end
 
   private
     def user_params
-      params.require(:user).permit(:login, :nicename, :email, :password, :password_confirmation)
+      params.require(:user).permit(
+        :login,
+        :nicename,
+        :email,
+        :password,
+        :password_confirmation
+      )
     end
 
     def all_users
@@ -54,9 +55,5 @@ class UsersController < ApplicationController
 
     def user_id
       @user = User.find(params[:id])
-    end
-
-    def create_user
-      @user = User.new(user_params)
     end
 end
