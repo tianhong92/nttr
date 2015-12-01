@@ -14,9 +14,9 @@ Rails.application.routes.draw do
 
   resources :user_sessions, only: [:new, :create, :destroy]
 
-  root 'users#index'
-
   match '/register', to: 'users#new', via: :all
   match '/login', to: 'user_sessions#new', via: :all
   match '/logout', to: 'user_sessions#destroy', via: :all
+
+  root 'users#index'
 end
