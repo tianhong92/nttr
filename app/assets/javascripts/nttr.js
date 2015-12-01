@@ -149,6 +149,11 @@ $(document).ready(function() {
         return this;
     }
 
+    $('.tweet').each(function() {
+        // Link all tweet content on load.
+        $(this).tweetContentLinks();
+    });
+
     //
     // Tweet delete callback function.
     // Action has been separated so that it can be attached to AJAX elements.
