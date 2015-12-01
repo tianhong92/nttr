@@ -97,7 +97,6 @@ $(document).ready(function() {
     $.fn.tweetContentLinks = function() {
         var tcl = {
             anchorClass: tweet.contentLink,
-            query: '/?s=',
             regex: {
                 // This regex is by no means comprehensive, but I consider it
                 // Good Enough for my purposes.
@@ -109,25 +108,29 @@ $(document).ready(function() {
             filterUnique: function(array) {
                 // Duplicate username mentions can lead to hashtags or usenames
                 // being wrapped in links twice.
+                 
                 return array.filter(function(element, index) {
                     return array.indexOf(element) === index;
                 });
             },
-            wrapLink: function(content, tag) {
-                var url = tcl.query + tag.substring(1, tag.length);
-                var anchor = '<a class="' + tcl.anchorClass + '" href="' + url
-                        + '">' + tag + '</a>';
-                var tag = new RegExp(tag, 'g');
+            wrapLink: function(type, content, tag) {
+                // Wrap hashtags and usename mentions in hyperlinks.
+                
+                var param = type === 'user' ? '/' : '?s=',
+                    url = param + tag.substring(1, tag.length),
+                    anchor = '<a class="' + tcl.anchorClass + '" href="' + url + '">' + tag + '</a>',
+                    tag = new RegExp(tag, 'g');
 
                 return content.replace(tag, anchor);
             },
             wrapContent: function(obj) {
                 // Find hashtags and user mentions, and wrap each in a hyperlink
                 // to that query.
+
                 obj = obj || this;
 
-                var $self = $(obj);
-                var content = $self.html();
+                var $self = $(obj),
+                    content = $self.html();
 
                 $.each(tcl.regex, function(key, regex) {
                     var matches = content.match(regex);
@@ -136,7 +139,7 @@ $(document).ready(function() {
                         matches = tcl.filterUnique(matches);
                         
                         $.each(matches, function(index, match) {
-                            content = tcl.wrapLink(content, match);    
+                            content = tcl.wrapLink(key, content, match);    
                         });
                     }
                 });
