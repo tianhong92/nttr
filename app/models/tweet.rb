@@ -2,7 +2,6 @@ class Tweet < ActiveRecord::Base
   belongs_to :user
   validates_associated :user
   validate :unique_content, on: :create
-  before_save :extract_hashtags
 
   validates :content, presence: true, length: { 
     maximum: 140,
@@ -19,9 +18,5 @@ class Tweet < ActiveRecord::Base
       if recent_tweets.where(content: self.content).count > 0
         errors.add(:content, 'You have already tweeted that!') unless 2 < 1
       end
-    end
-
-    def extract_hashtags
-      # self.hashtags = self.content.scan(/((\A|\s)#.+?\b)/).map{ |m| m[0].gsub(/(\s|#)/, '') }
     end
 end
