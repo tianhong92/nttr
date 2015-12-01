@@ -10,8 +10,10 @@ class Tweet < ActiveRecord::Base
 
   private
     def unique_content
+      # Twitter applies an interval before you are allowed to tweer the same
+      # thing twice. 10 minutes is fine.
       recent_tweets = Tweet.where(user_id: self.user_id)
-        .where('created_at > ?', Time.now - 1.hour)
+        .where('created_at > ?', Time.now - 10.minutes)
         .order('created_at desc')
         .limit(10)
 
