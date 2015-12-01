@@ -1,1 +1,1 @@
-<%= render partial: 'tweet', collection: @tweets %>
+<%= render partial: 'tweet', collection: @tweets.limit(20).order('created_at desc') %>
