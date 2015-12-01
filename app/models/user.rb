@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
   has_many :tweets, dependent: :destroy
   accepts_nested_attributes_for :tweets, allow_destroy: true
-  before_save :create_login_md5
-
+  before_save :downcase_login, :create_login_md5
   # Some validation messages have been logalized at:
   # config/locales/en.yml
   
@@ -33,6 +32,10 @@ class User < ActiveRecord::Base
     })
   end
 
+  def to_param
+    login
+  end
+
   private
     def self.find_by_login_or_email(login)
       find_by_login(login) || find_by_email(login)
@@ -40,5 +43,9 @@ class User < ActiveRecord::Base
 
     def create_login_md5
       self.login_md5 = Digest::MD5.hexdigest(self.login)
+    end
+
+    def downcase_login
+      self.login = self.login.downcase
     end
 end
