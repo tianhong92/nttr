@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_filter :require_session, only: [:edit, :update, :destroy]
-
   before_action :all_users, only: [:index, :create, :update]
   before_action :user_id, only: [:edit, :update, :destroy, :show]
 
