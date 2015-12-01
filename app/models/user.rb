@@ -2,44 +2,53 @@ class User < ActiveRecord::Base
   has_many :tweets, dependent: :destroy
   accepts_nested_attributes_for :tweets, allow_destroy: true
   before_save :downcase_login, :create_login_md5
-  # Some validation messages have been logalized at:
-  # config/locales/en.yml
   
   validates :login,
     presence: true,
     length: {
-      within: 6..20,
-      too_short: 'Usename must be at least 6 characters long.',
-      too_long: 'Username may be no more than 20 characters long.'
+      # Twitter allows usernames to contian any word char with a minimum length
+      # of 1. These short names are considered to be desireable and can sell
+      # for many monies.
+      #
+      # @_, @3, @_____, @______1 are all valid (and used) Twitter usernames.
+      #
+      # See: http://goo.gl/FMdLB0
+      in: 1..15,
+      too_short: 'Usename must be at least 1 character long.',
+      too_long: 'Username may be no more than 15 characters long.'
+    },
+    format: {
+      with: /\A\w+\z/,
+      message: 'Usernames may contain only letters, underscores or numbers.'
     }
 
   validates :password,
     presence: true,
+    confirmation: true,
     length: {
-      within: 8..50,
+      in: 8..100,
       too_short: 'Password must be at least 8 characters long.',
-      too_long: 'Password may be no more than 50 characters long.'
-    },
-    format: {
-      # I lost two hours of my life to this line. :|
-      # validates_format_of :password, with: /\A3\z/
-      with: /\A[A-Za-z]\w+/,
-      message: 'Username must begin with a letter and contain only letters, underscores or numbers.'
+      too_long: 'Password may be no more than 100 characters long.'
     }
+    # format: {
+    #  # I lost two hours of my life to this line. :|
+    #  # with: /\A3\z/
+    # }
 
-  validates_confirmation_of :password,
-    message: 'Password confirmation does not match the password.'
+  validates :password_confirmation, 
+    presence: true
 
   validates :email,
     presence: true,
     length: {
-      within: 6..40,
+      in: 6..40,
       too_short: 'Email must be at least 6 characters long.',
-      too_long: 'Email may be no more thna 40 characters long.'
+      too_long: 'Email may be no more than 40 characters long.'
     },
     format: {
       # I've been through this in practice. Email regex is a nightmare unless
-      # you KISS. This enforces *at least* a@b.c
+      # you KISS. This enforces *at least* a@t.co (which is a valid email
+      # associated with the Twitter company).
       # 
       # There exists national-level single-letter domains and two-letter TLDs.
       #
