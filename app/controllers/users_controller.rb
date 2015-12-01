@@ -53,6 +53,6 @@ class UsersController < ApplicationController
     end
 
     def user_id
-      @user = User.find(params[:id])
+      @user = User.find_by_login!(params[:login])
     end
 end
