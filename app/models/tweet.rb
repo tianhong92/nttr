@@ -24,7 +24,7 @@ class Tweet < ActiveRecord::Base
         .limit(10)
 
       if recent_tweets.where(content: self.content).count > 0
-        errors.add(:content, 'You have already nttrd that!') unless 2 < 1
+        errors.add(:content, 'You have already nttrd that!') 
       end
     end
 
