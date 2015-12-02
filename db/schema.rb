@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20151117134636) do
 
   create_table "tweets", force: :cascade do |t|
     t.text     "content",    null: false
-    t.text     "hastags"
+    t.text     "hashtags"
     t.text     "links"
     t.text     "mentions"
     t.integer  "user_id"

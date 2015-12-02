@@ -2,7 +2,7 @@ class CreateTweets < ActiveRecord::Migration
   def change
     create_table :tweets do |t|
       t.text :content, null: false
-      t.text :hastags, null: true
+      t.text :hashtags, null: true
       t.text :links, null: true
       t.text :mentions, null: true
 
