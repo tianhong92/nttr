@@ -7,22 +7,24 @@ class User < ActiveRecord::Base
     #
     # Login
     #
+    # Twitter allows usernames to contian any word char (A-Za-z0-9_) with a
+    # minimum length of 1. These short names are considered to be desireable
+    # and can sell for many monies.
+    #
+    # @_, @3, @_____, @______1 are all valid (and used) Twitter usernames.
+    #
+    # See: http://goo.gl/FMdLB0
+    #
+    # Twitter username length is inclusively in 1 - 15 characters.
+    # See: https://support.twitter.com/articles/14609
+    #
 
     opts.merge_validates_format_of_login_field_options({
-      # Twitter allows usernames to contian any word char (A-Za-z0-9_) with a
-      # minimum length of 1. These short names are considered to be desireable
-      # and can sell for many monies.
-      #
-      # @_, @3, @_____, @______1 are all valid (and used) Twitter usernames.
-      #
-      # See: http://goo.gl/FMdLB0
       with: /\A\w+\z/,
-      message: 'Usernames may contain only letters, underscores or numbers.'
+      message: 'Usernames may contain only letters, numbers and underscores.'
     })
 
     opts.merge_validates_length_of_login_field_options({
-      # Twitter username length is inclusively in 1 - 15 characters.
-      # See: https://support.twitter.com/articles/14609
       in: 1..15,
       too_short: 'Usename must be at least 1 character long.',
       too_long: 'Username may be no more than 15 characters long.'
@@ -31,16 +33,17 @@ class User < ActiveRecord::Base
     #
     # Email 
     #
+    # I've been through this in practice. Email regex is a nightmare unless
+    # you KISS. This enforces *at least* a@t.co (which is a valid email
+    # associated with the Twitter company).
+    # 
+    # There exists national-level single-letter domains and two-letter TLDs.
+    #
+    # See: http://davidcel.is/posts/stop-validating-email-addresses-with-regex
+    # See: https://regex101.com/r/jS2rV9/1
+    #
 
     opts.merge_validates_format_of_email_field_options({
-      # I've been through this in practice. Email regex is a nightmare unless
-      # you KISS. This enforces *at least* a@t.co (which is a valid email
-      # associated with the Twitter company).
-      # 
-      # There exists national-level single-letter domains and two-letter TLDs.
-      #
-      # See: http://davidcel.is/posts/stop-validating-email-addresses-with-regex
-      # See: https://regex101.com/r/jS2rV9/1
       with: /\A.+@.+\..+\z/,
       message: 'Email must be in the format of \'foo@bar.tld\'.'
     })
@@ -53,6 +56,14 @@ class User < ActiveRecord::Base
 
     #
     # Password
+    #
+    # There is no format validation in Authlogic except: a password must contain
+    # at least one non-space character and meet length requirements. This worked
+    # as a password in testing (within quotes):
+    #
+    # '       8'
+    #
+    # /[^\s]/
     #
 
     opts.merge_validates_length_of_password_field_options({
