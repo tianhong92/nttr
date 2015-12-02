@@ -91,73 +91,6 @@ $(document).ready(function() {
     });
 
     //
-    // Hyperlink Tweet URLs, Hashtags and Mentions
-    //
-
-    $.fn.tweetContentLinks = function() {
-        var tcl = {
-            anchorClass: tweet.contentLink,
-            regex: {
-                // This regex is by no means comprehensive, but I consider it
-                // Good Enough for my purposes.
-                // https://regex101.com/r/nD7iD9/5
-                hash: /(?!\s)#([A-Za-z]|\d[A-Za-z])\w*\b/g,
-                // https://regex101.com/r/jU9hC5/5
-                user: /(?![\s,.?\/()"\'()*+,-./:;<=>?@[\\]^_`{|}~])@[A-Za-z]\w*?\b/g
-            },
-            filterUnique: function(array) {
-                // Duplicate username mentions can lead to hashtags or usenames
-                // being wrapped in links twice.
-                 
-                return array.filter(function(element, index) {
-                    return array.indexOf(element) === index;
-                });
-            },
-            wrapLink: function(type, content, tag) {
-                // Wrap hashtags and usename mentions in hyperlinks.
-                
-                var param = type === 'user' ? '/' : '?s=',
-                    url = param + tag.substring(1, tag.length),
-                    anchor = '<a class="' + tcl.anchorClass + '" href="' + url + '">' + tag + '</a>',
-                    tag = new RegExp(tag, 'g');
-
-                return content.replace(tag, anchor);
-            },
-            wrapContent: function(obj) {
-                // Find hashtags and user mentions, and wrap each in a hyperlink
-                // to that query.
-
-                obj = obj || this;
-
-                var $self = $(obj),
-                    content = $self.html();
-
-                $.each(tcl.regex, function(key, regex) {
-                    var matches = content.match(regex);
-
-                    if (matches) {
-                        matches = tcl.filterUnique(matches);
-                        
-                        $.each(matches, function(index, match) {
-                            content = tcl.wrapLink(key, content, match);    
-                        });
-                    }
-                });
-
-                return content;
-            }
-        };
-
-        this.html(tcl.wrapContent(this));
-        return this;
-    }
-
-    $('.tweet').each(function() {
-        // Link all tweet content on load.
-        $(this).tweetContentLinks();
-    });
-
-    //
     // Tweet delete callback function.
     // Action has been separated so that it can be attached to AJAX elements.
     // Tweet is faded out before being removed.
@@ -184,7 +117,6 @@ $(document).ready(function() {
         $(data)
             .hide()
             .prependTo(tweet.list)
-            .tweetContentLinks()
             .fadeIn(animationTime).find(tweet.del)
             .on('ajax:success', removeHook);
     }).on('ajax:error', function(err, xhr) {

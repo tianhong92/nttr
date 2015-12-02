@@ -11,4 +11,46 @@ module TweetsHelper
 
     time
   end
+
+  # This set of methods render nttr @user mentions and #hastags into clickable
+  # hyerplinks.
+
+  def trim_content_tag(tag)
+    # Trim all characters before the @ or # symbols.
+    tag.squish.gsub(/\A.*(?=[@#])/, '')
+  end
+
+  def content_tag_link(content, tags)
+    # Render #hashtag or @mention as link.
+    tags.each do |tag|
+      href = '/'
+      href += '?s=' if tag.include? '#'
+      href += tag.gsub(/[@#]/, '')
+
+      anchor = '<a class="tweet-content-link" href="%s">%s</a>' % [href, tag]
+      content.gsub!(tag, anchor)
+    end
+  end
+
+  def link_tweet_content_tags(content)
+    # Scan content for hashtags and mentions.
+    regex = {
+      user: /((\A|[^\w!])@\w+\b)/,
+      hash: /((?!\s)#[A-Za-z]\w*\b)/ 
+    }
+
+    content_tags = []
+
+    regex.each do |key, exp|
+      if content =~ exp then
+        content_tags += content.scan(exp).map { |v| trim_content_tag v[0] }.uniq
+      end
+    end
+
+    if !content_tags.empty? then
+      content_tag_link(content, content_tags)
+    end
+
+    content
+  end
 end
