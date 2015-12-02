@@ -29,6 +29,7 @@ class Tweet < ActiveRecord::Base
     end
 
     def clean_tag(tag)
+      # Trim spaces and other junk from hashtags and mentions.
       tag.squish.gsub(/\A.*(?=[@#])/, '')
     end
 
