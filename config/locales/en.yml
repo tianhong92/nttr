@@ -18,16 +18,12 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
-# 
-# Authlogic: http://www.rubydoc.info/github/binarylogic/authlogic/Authlogic/I18n
 
 en:
   authlogic: 
+    # See app/models/user_session.rb for more information!
     error_messages:
+      login_blank: 'Login may not be blank.'
       login_not_found: 'Username not found.'
-      login_blank: 'Password cannot not be empty.'
-      password_blank: 'Password cannot be blank.'
-      login_invalid: 'Username should contain only letters, numbers, spaces, and .-_@+'
-  activerecord:
-    error_messages:
-      password: 'Awdawdaddddw'
+      password_blank: 'Password may not be blank.'
+      password_invalid: 'Invalid password.'
