@@ -15,6 +15,9 @@ ActiveRecord::Schema.define(version: 20151117134636) do
 
   create_table "tweets", force: :cascade do |t|
     t.text     "content",    null: false
+    t.text     "hastags"
+    t.text     "links"
+    t.text     "mentions"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
