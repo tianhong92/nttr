@@ -1,9 +1,11 @@
 class Tweet < ActiveRecord::Base
+  include ActionView::Helpers::SanitizeHelper
+
   belongs_to :user
   validates_associated :user
   validate :unique_content, on: :create
 
-  before_save :find_hashtags, :find_mentions, :find_links
+  before_save :strip_html, :find_hashtags, :find_mentions, :find_links
 
   validates :content,
     presence: {
@@ -28,8 +30,12 @@ class Tweet < ActiveRecord::Base
       end
     end
 
+    def strip_html
+      # TODO: Test the shit out of this.
+      self.content = strip_tags self.content
+    end
+
     def clean_tag(tag)
-      # Trim spaces and other junk from hashtags and mentions.
       tag.squish.gsub(/\A.*(?=[@#])/, '')
     end
 
