@@ -41,8 +41,7 @@ class Tweet < ActiveRecord::Base
 
     def content_scan(regex)
       if self.content =~ regex then 
-        # self.content.scan(regex).map{ |tag| clean_tag tag[0] }.uniq.join(',')
-        self.content.scan(regex).map{ |tag| tag[0] }.uniq.join(',')
+        self.content.scan(regex).map{ |tag| clean_tag tag[0] }.uniq.join(',')
       end
     end
 
@@ -61,6 +60,7 @@ class Tweet < ActiveRecord::Base
       # This regex is tentative and by no means complete. It currently only
       # matches the .com, .org, .net, .int, .edu, .gov, and .mil TLDs.
       # See: https://regex101.com/r/hA3sD8/5
-      self.links = content_scan /(?!\W)(http(s?):\/\/)?(www\.)?[a-z0-9-.]+?\.[cnoiegm][a-z]{1,2}(\/[^\s]*|(?=\W))?/
+      # See: http://rubular.com/r/4wf5qeSOJG
+      self.links = content_scan /((?!\W)(http(s?):\/\/)?(www\.)?[a-z0-9-.]+?\.[cnoiegm][a-z]{1,2}(\/[^\s]*|(?=\W))?)/
     end
 end
