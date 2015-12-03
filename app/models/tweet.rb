@@ -5,6 +5,7 @@ class Tweet < ActiveRecord::Base
   validates_associated :user
   validate :unique_content, on: :create
 
+  # Sanitize tweet content and extract mentions, hashtags and hyperlinks.
   before_save :strip_html, :find_hashtags, :find_mentions, :find_links
 
   validates :content,
@@ -40,21 +41,26 @@ class Tweet < ActiveRecord::Base
 
     def content_scan(regex)
       if self.content =~ regex then 
-        self.content.scan(regex).map{ |tag| clean_tag tag[0] }.uniq.join(',')
+        # self.content.scan(regex).map{ |tag| clean_tag tag[0] }.uniq.join(',')
+        self.content.scan(regex).map{ |tag| tag[0] }.uniq.join(',')
       end
     end
 
     def find_hashtags
+      # Regex example:
+      # See: http://rubular.com/r/8xLZneArNp
       self.hashtags = content_scan /((?!\s)#[A-Za-z]\w*\b)/
     end
 
     def find_mentions
-      self.mentions = content_scan /((\A|[^\w!])@\w+\b)/
+      # See: http://rubular.com/r/SKQRb5lzHk
+      self.mentions = content_scan /(((?=[^\w!])@\w+\b))/
     end
 
     def find_links
-      # TODO: Links are an order of magnitude more complex than mentions or tags
-      # to match and exctract.
-      self.links = nil
+      # This regex is tentative and by no means complete. It currently only
+      # matches the .com, .org, .net, .int, .edu, .gov, and .mil TLDs.
+      # See: https://regex101.com/r/hA3sD8/5
+      self.links = content_scan /(?!\W)(http(s?):\/\/)?(www\.)?[a-z0-9-.]+?\.[cnoiegm][a-z]{1,2}(\/[^\s]*|(?=\W))?/
     end
 end
