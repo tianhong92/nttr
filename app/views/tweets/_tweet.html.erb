@@ -16,7 +16,7 @@
         <%-# Tweet meta information (creation) %>
         <%= link_to user_tweet_path(tweet.user.id, tweet.id), class: 'tweet-link' do %>
           <%-# Datetime is in compliant format. %>
-          <time datetime="<%= tweet.created_at %>"><%= time_ago_in_words(tweet.created_at) %>
+          <time datetime="<%= tweet.created_at %>"><%= tweet_relative_time(tweet.created_at) %>
         <% end %>
       </span>
     </p>
