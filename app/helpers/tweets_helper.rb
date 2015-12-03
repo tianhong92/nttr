@@ -32,8 +32,7 @@ module TweetsHelper
         href += '?s=' if tag.include? '#'
         href += tag.gsub(/\A[@#]/, '')
 
-        anchor = '<a class="tweet-content-link" href="%s">%s</a>' % [href, tag]
-        content.gsub!(tag, anchor)
+        content.gsub!(tag, %Q'<a class="tweet-content-link" href="#{href}">#{tag}</a>')
       end
     end
 
