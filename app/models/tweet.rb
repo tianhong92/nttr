@@ -31,7 +31,6 @@ class Tweet < ActiveRecord::Base
     end
 
     def strip_html
-      # TODO: Test the shit out of this.
       self.content = strip_tags self.content
     end
 
