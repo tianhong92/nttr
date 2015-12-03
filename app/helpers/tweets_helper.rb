@@ -21,8 +21,16 @@ module TweetsHelper
           next
         end
 
-        href = '/'
-        href += '?s=' if tag.include? '#'
+        href = ''
+
+        if tag =~ /\A[@#]/ then
+          href += '/'
+        end
+
+        if tag =~ /\A#/ then
+          href += '?s='
+        end
+
         href += tag.gsub(/\A[@#]/, '')
 
         content.gsub!(tag, %Q'<a class="tweet-content-link" href="#{href}">#{tag}</a>')
