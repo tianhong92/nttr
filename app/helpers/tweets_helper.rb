@@ -1,9 +1,8 @@
 module TweetsHelper
   def tweet_relative_time(timestamp)
     # Change 'about 16 hours' to '16h'
-    time_regex = /(about|\s|(econd|inute|our)s?)/
-    timestamp = time_ago_in_words(timestamp, include_seconds: true).to_s 
-    timestamp.gsub!(time_regex, '')
+    time_regex = /(\Aabout|\s|(econd|inute|our)s?\z)/
+    time_ago_in_words(timestamp, include_seconds: true).to_s.gsub(time_regex, '')
   end
 
   # This set of methods render nttr @user mentions and #hastags into clickable
