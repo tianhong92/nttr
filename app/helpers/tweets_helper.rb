@@ -15,42 +15,33 @@ module TweetsHelper
   # This set of methods render nttr @user mentions and #hastags into clickable
   # hyerplinks.
 
-  def trim_content_tag(tag)
-    # Trim all characters before the @ or # symbols.
-    tag.squish.gsub(/\A.*(?=[@#])/, '')
-  end
-
   def content_tag_link(content, tags)
-    # Render #hashtag or @mention as link.
-    tags.each do |tag|
-      href = '/'
-      href += '?s=' if tag.include? '#'
-      href += tag.gsub(/[@#]/, '')
+    if tags then
+      tags = tags.split(',')
 
-      anchor = '<a class="tweet-content-link" href="%s">%s</a>' % [href, tag]
-      content.gsub!(tag, anchor)
-    end
-  end
+      # Render #hashtag or @mention as link.
+      tags.each do |tag|
+        if tag.include? '@' and User.where(login: tag[1..-1]).empty? then
+          # Twitter will not link to user profiles where the profile does not
+          # exist. The mention will be marked up in the editor, but fail when it
+          # is passed to the server to validate.
+          next
+        end
 
-  def link_tweet_content_tags(content)
-    # Scan content for hashtags and mentions.
-    regex = {
-      user: /((\A|[^\w!])@\w+\b)/,
-      hash: /((?!\s)#[A-Za-z]\w*\b)/ 
-    }
+        href = '/'
+        href += '?s=' if tag.include? '#'
+        href += tag.gsub(/\A[@#]/, '')
 
-    content_tags = []
-
-    regex.each do |key, exp|
-      if content =~ exp then
-        content_tags += content.scan(exp).map { |v| trim_content_tag v[0] }.uniq
+        content.gsub!(tag, %Q'<a class="tweet-content-link" href="#{href}">#{tag}</a>')
       end
     end
 
-    if !content_tags.empty? then
-      content_tag_link(content, content_tags)
-    end
-
     content
+  end
+
+  def link_tweet_content_tags(tweet)
+    content = content_tag_link tweet.content, tweet.mentions
+    content = content_tag_link tweet.content, tweet.hashtags
+    content = content_tag_link tweet.content, tweet.links
   end
 end
