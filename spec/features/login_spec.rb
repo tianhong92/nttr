@@ -1,14 +1,14 @@
 require 'spec_helper'
 require 'rails_helper'
 
-def create_user(name = 'birdmen')
+def create_user(name = 'birdman')
   password = "ilove#{name.delete(' ').split(//).shuffle!.join}"
 
   # SKRAW-W-W-W-W!
   @user = User.create(
     login: name,
-    email: "angry.#{name}@bhalash.com",
-    nicename: "Angry #{name.capitalize}",
+    email: "enlightened.#{name}@bhalash.com",
+    nicename: "Enlightened #{name.capitalize}",
     password: password,
     password_confirmation: password 
   )
