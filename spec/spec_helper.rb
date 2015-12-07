@@ -28,6 +28,8 @@ def spawn_test_user(name = 'birdman')
 end
 
 def log_in_as(user)
+  visit new_user_session_path
+
   within '#login' do
     fill_in 'user_session_login', with: user.email
     fill_in 'user_session_password', with: user.password
@@ -36,12 +38,11 @@ def log_in_as(user)
 end
 
 def log_out
-  session = UserSession.find
-  session.destroy
+  visit '/logout'
 end
 
 def as_user(user)
-  log_in_as(user)
+  log_in_as user
   yield
   log_out
 end
