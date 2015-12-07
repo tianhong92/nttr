@@ -61,48 +61,48 @@ describe 'When viewing Nttr' do
 end
 
 context 'When testing Nttr login' do
-  # difference between the two methods. Think of it in terms of plain 
-  # language: You /describe/ a set of tests, you /give context/ for a set of
-  # tests.
-  
+  # Think of it in terms of plain language: You /describe/ a set of tests, you
+  # /give context/ for a set of tests.
+  #
   # Setup can only be called from the top of a context or describe block.
   # See: spec/rails_helper.rb for how AuthLogic was initialized.
   setup :activate_authlogic 
 
   let(:test_user) do
-    # Link: https://goo.gl/9UzXG6
+    # See: https://goo.gl/9UzXG6
     #
-    # The difference between before and let is that before is called once, 
-    # each time, before a test. In the 'open the front page' block above, 
-    # the URL is visited once for each test. 
+    # The difference between before() and let() is that before() is called once, 
+    # either before each or all, before a test. In the 'open the front page'
+    # block above, the URL is visited once for each test. 
     # 
     # In many ways it is similar to before_action or before_filter in a 
     # controller.
     #
     # /let/, however, is called once and cached.
     # 
-    # Build (used above) does not persist in memory,
-    # Create does. It also seems to call on Authlogic methods, such that the 
-    # attributes needed for a user session aren't created.
+    # Build (used above) does not persist in memory, but create does. It also
+    # seems to call on Authlogic methods, such that the attributes needed for a
+    # user session aren't created.
     #
     # Authlogic uses the user's ID to generate a session. I need to build a
     # phantom user who has an ID attribute set.
     #
-    # Create adds a user to the database.
-    # FactoryGirl.create(:user)
-    # Build creates a user only in memory.
+    # Ways I have to create a user:
+    #
+    # 1. Create adds a user to the database.
+    FactoryGirl.create(:user)
+    #
+    # 2. Build creates a user only in memory.
     # FactoryGirl.build(:user)
-    # Call the model directly.
-    @user = spawn_test_user
+    #
+    # 3. Call the model directly User.create(...).
+    # spawn_test_user
 
     # Authlogic silently fails to create a session, upon login, unless the
-    # user is created with the create_user call. A user-in-memory created by
+    # user is created with the create_user call. A user created by
     # 
-    #   FactoryGirl.create(:user) or FactoryGirl.build(:user)
-    #
-    # does not work, nor does a manual call to 
-    #
-    #   UserSession.create(:test_user)
+    #   FactoryGirl.create(:user)
+    #   FactoryGirl.build(:user)
     #
     # Why is this so, and how can I avoid it in future? My understanding is that
     # a major chokepoint of tests are areas of contact with the filesystem, and
@@ -114,20 +114,11 @@ context 'When testing Nttr login' do
     # the user. So the session will fail and your test fails.
   end
   
-  # The test user (as an object) is only available within the scope of the spec
-  # tests. This line will throw an error.
-  # p test_user
-  
-  # let(:session) do
-  #   UserSession.create(test_user)
-  # end
-
-  it 'user should exist' do
-    # p test_user
+  it 'test user should exist' do
     expect(test_user).not_to be_falsey
   end
 
-  it 'the login form should work' do
+  it 'page should contain the timeline' do
     visit root_url
 
     within '#login' do
@@ -136,8 +127,7 @@ context 'When testing Nttr login' do
       click_button 'Log in'
     end
 
-    within '#tweets' do
-      expect(page).to have_content 'Nttrs'
-    end
+    # expect(page).to have_css '#tweets'
+    expect(page).to have_content 'Nttrs'
   end
 end
