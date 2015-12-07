@@ -2,9 +2,7 @@ class TweetsController < ApplicationController
   before_filter :require_session, except: [:index, :show]
 
   # All tweets.
-  before_action :all_tweets, only: [:index, :create]
-  # Create new tweet.
-  before_action :new_tweet, only: [:index, :new]
+  before_action :all_tweets, only: [:index]
   # Specific tweet.
   before_action :tweet_id, only: [:destroy, :show]
   # Redirect to home upon a new form or update action.
@@ -20,13 +18,13 @@ class TweetsController < ApplicationController
   end
 
   def create
-    @user ||= User.find(current_user.id)
+    @user = User.find(current_user.id)
     @tweet = @user.tweets.create(tweet_params)
 
     if @tweet.save 
       render partial: 'tweets/tweet', locals: { tweet: @tweet }
     else 
-      # Ask how to correctly raise an error here, then dispatch HTML and
+      # TODO: Ask how to correctly raise an error here, then dispatch HTML and
       # expect it at the client level.
       # render json: @tweet.errors.messages, status: 422
       render partial: 'error', locals: { tweet: @tweet }, status: 422
