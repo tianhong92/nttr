@@ -18,4 +18,8 @@ FactoryGirl.define do
     # persistence_token Authlogic::Random.hex_token
     # crypted_password Authlogic::CryptoProviders::Sha512.encrypt(password_str + salt)
   end
+
+  factory :tweet, class: Tweet do
+    content 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  end
 end
