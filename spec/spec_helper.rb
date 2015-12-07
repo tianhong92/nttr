@@ -8,27 +8,19 @@ RSpec.configure do |config|
   end
 end
 
-def login_as_user(user)
-  session = UserSession.create login: user.login, password: user.password
-  session.save 
-  session
-end
-
-def test_as_user
-  @user = FactoryGirl.build :user
-  @session = login_as_user @user
-  yield
-end
-
 def spawn_test_user(name = 'birdman')
   password = "ilove#{name.delete(' ').split(//).shuffle!.join}"
+  salt = Authlogic::Random.hex_token
 
   User.create!(
-    id: '1',
+    id: 1,
     login: name,
     email: "enlightened.#{name}@bhalash.com",
     nicename: "Enlightened #{name.capitalize}",
     password: password,
-    password_confirmation: password 
+    password_confirmation: password,
+    # password_salt: salt,
+    # crypted_password: Authlogic::CryptoProviders::Sha512.encrypt(password + salt),
+    # persistence_token: Authlogic::Random.hex_token
   )
 end
