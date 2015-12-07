@@ -4,7 +4,7 @@ FactoryGirl.define do
 
     id 1
     login 'squid'
-    email 'squidlover@bhalash.com'
+    email 'squidlover@example.com'
     nicename 'Squid Lover'
     password password
     password_confirmation password
