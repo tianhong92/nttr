@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rails_helper'
 
-describe 'When viewing Nttr' do
+describe 'When viewing Nttr the page' do
   # RSpec has test syntax. Capybara only extends this to web page features.
   # Cheat sheet for Capybara expect and general syntax: 
   # Link: https://gist.github.com/zhengjia/428105
@@ -9,58 +9,42 @@ describe 'When viewing Nttr' do
   # General RSpec expect:
   # Link: https://github.com/rspec/rspec-expectations
 
-  describe 'open the front page' do
-    before(:each) do 
-      # Perform this action before /each/ test. In this case, it is
-      # to open the application's root URL.
-      #
-      # Link: https://goo.gl/fo5j4j
-      #
-      # There exists:
-      #
-      #   after_([:each, :all, :suite])  
-      #   before_([:each, :all, :suite])
-      visit root_url
-    end
-
-    describe 'examine content' do
-      # Nested tests.
+  before(:each) do
+    visit root_url
+  end
       
-      it 'and find the welcome title' do
-        within '#welcome' do
-          # Within specifies a CSS3 selector.
-          expect(page).to have_content 'Welcome to nttr.'
-        end
-      end
-
-      it 'and find the login form' do
-        expect(page).to have_content 'Remember me'
-      end
-
-      # Will be flagged as PENDING: Not yet implemented
-      it 'and find the registration form'
-
-      it 'should have ponies' do
-        # Deliberate failing test.
-        within('#register') do
-          expect(page).to have_content 'PONIES'
-        end
-      end
+  it 'should display the title' do
+    # within '#welcome' do
+    within 'div[id^=welcome]:not(:nth-child(3))' do
+      # 'within' accepts any valid CSS3 selector, so crazy selectors like the
+      # above will work grand (but don't worry about anything but general class
+      # or ID selectors unless you're a crazy-eyed CSS guru like me).
+      #
+      # See: http://www.w3schools.com/cssref/css_selectors.asp
+      expect(page).to have_content 'Welcome to nttr.'
     end
+  end
 
-    describe 'examine CSS' do
-      # Nested tests - examine CSS.
-    
-      it do 
-        # If the label is blank, one is generated. This outputs:
-        # should have css ".container"
-        expect(page).to have_css('.container', 'margin-right: auto')
-      end
+  it do 
+    # If the label is blank, one is generated. This outputs:
+    #
+    #   should have css ".container"
+    #
+    expect(page).to have_css('.container', 'margin-right: auto')
+  end
+
+  # Will be flagged as PENDING: Not yet implemented
+  it 'and find the registration form'
+
+  it 'should display magical ponies' do
+    within('#register') do
+      # Deliberate failing test.
+      expect(page).to have_content 'LITERALLY MAGIC PONIES'
     end
   end
 end
 
-context 'When testing Nttr login' do
+context 'While logged in' do
   # Think of it in terms of plain language: You /describe/ a set of tests, you
   # /give context/ for a set of tests.
   #
@@ -87,7 +71,7 @@ context 'When testing Nttr login' do
     # Authlogic uses the user's ID to generate a session. I need to build a
     # phantom user who has an ID attribute set.
     #
-    # Ways I have to create a user:
+    # Ways to to create a user (with FactoryGirl):
     #
     # 1. Create adds a user to the database.
     FactoryGirl.create(:user)
@@ -97,41 +81,77 @@ context 'When testing Nttr login' do
     #
     # 3. Call the model directly User.create(...).
     # spawn_test_user
-
-    # Authlogic silently fails to create a session, upon login, unless the
-    # user is created with the create_user call. A user created by
-    # 
-    #   FactoryGirl.create(:user)
-    #   FactoryGirl.build(:user)
     #
-    # Why is this so, and how can I avoid it in future? My understanding is that
-    # a major chokepoint of tests are areas of contact with the filesystem, and
-    # the database in particular. A goal of FactoryGirl is to avoid this 
-    # contact with pastiche, kinda-sorta-good enough objects.
+    # AuthLogic is picky. In order to create a session, there must exist:
     #
-    # Update 7/12/2015: AuthLogic requires the user to exist in the database. It
-    # appears that the session credentials are derived from the database ID of
-    # the user. So the session will fail and your test fails.
+    # 1. A user in the database. NOT in memory. FactoryGirl.create or 
+    #    User.create must be called.
+    # 2. A session created using the login form (more below).
+    #
+    # On AuthLogic feature test sessions:
+    # UserSession.create(test_user) does nothing at all during a feature test. 
+    # AuthLogic requires a cookie to be present in the browser. So, say you 
+    # create a user session with UserSession.create(test_user). This happens:
+    #
+    # 1. A user session is created on the server.
+    # 2. The client visitor (Capybara, in this case) wants to view authenticated
+    #    areas of the website. 
+    # 3. AuthLogic looks for a cookie named (_Authy_session) with the relevant
+    #    session token. 
+    # 4. This cookie does not exist, so AuthLogic performs whatever action you
+    #    have set up to occur when someone tries to access the authenticated
+    #    area (in my case it is a silent redirect to the root page).
+    #
+    # You can work around this, although it goes against the spirit of a
+    # complete feature test, if you set a cookie after you create the session:
+    #
+    #   UserSession.create(test_user)
+    #   Capybara.current_session.driver.browser.set_cookie = "#{@user.persistence_token}::#{@user.send(@user.class.primary_key)}"
+    #
+    # See: http://www.spacevatican.org/2011/12/5/request-specs-and-authlogic/
   end
-  
+
   it 'test user should exist' do
-    expect(test_user).not_to be_falsey
+    expect(User.where(login: test_user.login)).to exist
   end
 
-  it 'page should contain the timeline' do
-    # Capybara.current_session.driver.browser.current_session.set_cookie 'awdawdawdawdwadawdawd'
-    puts test_user
-    puts 'HELP I\'M STUCK IN A UNIVERSE FACTORY'
-
-    visit root_url
-
-    within '#login' do
-      fill_in 'Username or email', with: test_user.email
-      fill_in 'Password', with: test_user.password
-      click_button 'Log in'
+  context 'Test user should' do
+    let!(:session) do
+        # You could create a session and cookie here if you so wished.
+        log_in_as test_user
     end
 
-    # expect(page).to have_css '#tweets'
-    expect(page).to have_content 'Nttrs'
+    it 'see the timeline' do
+      expect(page).to have_content 'Nttrs'
+    end
+
+    it 'see the broadcast form' do
+      expect(page).to have_css '#broadcast'
+    end
+  end
+end
+
+context 'While on the home page as a user' do
+  setup :activate_authlogic 
+
+  let(:test_user) do
+    FactoryGirl.create(:user)
+  end
+  
+  it 'should be able to broadcast a nttr' do
+    as_user test_user do
+      # Example of yielded block. as_user:
+      #   
+      # 1. Visits the login page.
+      # 2. Completes the form with the test user's login and password.
+      # 3. Submits the login form.
+      # 4. Yields to the passed block.
+      within '#broadcast' do
+        fill_in 'tweet_content', with: 'Lorem ipsum doo doo doo poo poo.'
+        click_button 'tweet_submit'
+      end
+      
+      expect(page.status_code).to be(200)
+    end
   end
 end
