@@ -19,3 +19,16 @@ def test_as_user
   @session = login_as_user @user
   yield
 end
+
+def spawn_test_user(name = 'birdman')
+  password = "ilove#{name.delete(' ').split(//).shuffle!.join}"
+
+  User.create!(
+    id: '1',
+    login: name,
+    email: "enlightened.#{name}@bhalash.com",
+    nicename: "Enlightened #{name.capitalize}",
+    password: password,
+    password_confirmation: password 
+  )
+end

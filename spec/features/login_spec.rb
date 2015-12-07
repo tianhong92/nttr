@@ -1,19 +1,6 @@
 require 'spec_helper'
 require 'rails_helper'
 
-def create_user(name = 'birdman')
-  password = "ilove#{name.delete(' ').split(//).shuffle!.join}"
-
-  # SKRAW-W-W-W-W!
-  @user = User.create(
-    login: name,
-    email: "enlightened.#{name}@bhalash.com",
-    nicename: "Enlightened #{name.capitalize}",
-    password: password,
-    password_confirmation: password 
-  )
-end
-
 describe 'When viewing Nttr' do
   # RSpec has test syntax. Capybara only extends this to web page features.
   # Cheat sheet for Capybara expect and general syntax: 
@@ -30,6 +17,7 @@ describe 'When viewing Nttr' do
       # Link: https://goo.gl/fo5j4j
       #
       # There exists:
+      #
       #   after_([:each, :all, :suite])  
       #   before_([:each, :all, :suite])
       visit root_url
@@ -92,54 +80,47 @@ context 'When testing Nttr login' do
     # controller.
     #
     # /let/, however, is called once and cached.
-    #
-    # create_user('squid')
-
+    # 
     # Build (used above) does not persist in memory,
     # Create does. It also seems to call on Authlogic methods, such that the 
     # attributes needed for a user session aren't created.
     #
-    # TODO: Figure out why.
     # Authlogic uses the user's ID to generate a session. I need to build a
     # phantom user who has an ID attribute set.
-    
+    #
     # Create adds a user to the database.
     # FactoryGirl.create(:user)
     # Build creates a user only in memory.
-    FactoryGirl.create(:user)
+    # FactoryGirl.build(:user)
+    # Call the model directly.
+    @user = spawn_test_user
 
-    # TODO: Authlogic silently fails to create a session, upon login, unless the
+    # Authlogic silently fails to create a session, upon login, unless the
     # user is created with the create_user call. A user-in-memory created by
     # 
-    # FactoryGirl.create(:user) or FactoryGirl.build(:user)
+    #   FactoryGirl.create(:user) or FactoryGirl.build(:user)
     #
     # does not work, nor does a manual call to 
     #
-    # UserSession.create(:test_user)
+    #   UserSession.create(:test_user)
     #
     # Why is this so, and how can I avoid it in future? My understanding is that
     # a major chokepoint of tests are areas of contact with the filesystem, and
     # the database in particular. A goal of FactoryGirl is to avoid this 
     # contact with pastiche, kinda-sorta-good enough objects.
+    #
+    # Update 7/12/2015: AuthLogic requires the user to exist in the database. It
+    # appears that the session credentials are derived from the database ID of
+    # the user. So the session will fail and your test fails.
   end
-
-  # let!(:existing_user) do
-  #   # Fetch existing user. Not used because it duplicates the above.
-  #   @user = User.find_by_email('pony.lover@sonru.com')
-  #   UserSession.create(@user)
-  # end
   
   # The test user (as an object) is only available within the scope of the spec
   # tests. This line will throw an error.
   # p test_user
   
-  # before(:each) do
+  # let(:session) do
   #   UserSession.create(test_user)
   # end
-
-  let(:session) do
-    UserSession.create(test_user)
-  end
 
   it 'user should exist' do
     # p test_user
@@ -148,7 +129,6 @@ context 'When testing Nttr login' do
 
   it 'the login form should work' do
     visit root_url
-    # expect(page).to have_content 'Nttrs'
 
     within '#login' do
       fill_in 'Username or email', with: test_user.email
@@ -158,16 +138,6 @@ context 'When testing Nttr login' do
 
     within '#tweets' do
       expect(page).to have_content 'Nttrs'
-    end
-  end
-end
-
-context 'With a yielded block' do
-  setup :activate_authlogic 
-
-  it 'should visit the index' do
-    test_as_user do
-      visit root_url
     end
   end
 end
