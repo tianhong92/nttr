@@ -61,6 +61,6 @@ class Tweet < ActiveRecord::Base
       # matches the .com, .org, .net, .int, .edu, .gov, and .mil TLDs.
       # See: https://regex101.com/r/hA3sD8/5
       # See: http://rubular.com/r/4wf5qeSOJG
-      self.links = content_scan /((?!\W)(http(s?):\/\/)?(www\.)?[a-z0-9-.]+?\.[cnoiegm][a-z]{1,2}(\/[^\s]*|(?=\W))?)/
+      self.links = content_scan /((?!\W)(http(s?):\/\/)?(www\.)?[a-z0-9.-]+?\.[cnoiegm][a-z]{1,2}(\/[^\s]*|(?=\W))?)/
     end
 end

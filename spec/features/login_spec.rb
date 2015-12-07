@@ -119,6 +119,10 @@ context 'When testing Nttr login' do
   end
 
   it 'page should contain the timeline' do
+    # Capybara.current_session.driver.browser.current_session.set_cookie 'awdawdawdawdwadawdawd'
+    puts test_user
+    puts 'HELP I\'M STUCK IN A UNIVERSE FACTORY'
+
     visit root_url
 
     within '#login' do
