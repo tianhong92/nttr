@@ -98,9 +98,9 @@ context 'While logged in' do
     #    areas of the website. 
     # 3. AuthLogic looks for a cookie named (_Authy_session) with the relevant
     #    session token. 
-    # 4. This cookie does not exist, so AuthLogic performs whatever action you
-    #    have set up to occur when someone tries to access the authenticated
-    #    area (in my case it is a silent redirect to the root page).
+    # 4. This cookie does not exist, so the attempt to access the authenticated
+    #    are a fails. AuthLogic then performs whatever action you have set up to
+    #    handle unauthenticated access (redirect to / in my case)
     #
     # You can work around this, although it goes against the spirit of a
     # complete feature test, if you set a cookie after you create the session:
