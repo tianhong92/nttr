@@ -21,6 +21,10 @@ def spawn_test_user(name = 'birdman')
     nicename: "Enlightened #{name.capitalize}",
     password: password,
     password_confirmation: password,
+    # Included so I can explain why these aren't used: AuthLogic creates these
+    # fields itself when I spawn a user. If I attempt to create these myself 
+    # AuthLogic considers the user to be invalid.
+    #
     # password_salt: salt,
     # crypted_password: Authlogic::CryptoProviders::Sha512.encrypt(password + salt),
     # persistence_token: Authlogic::Random.hex_token
