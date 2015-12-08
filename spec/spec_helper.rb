@@ -9,8 +9,8 @@ RSpec.configure do |config|
 end
 
 def spawn_test_user(name = 'birdman')
-  # This method is not used, but is retained for illustration of this way for
-  # the creation of dummy users.
+  # This method is not used, but is retained for illustration of this method to
+  # create dummy users.
   password = "ilove#{name.delete(' ').split(//).shuffle!.join}"
   salt = Authlogic::Random.hex_token
 
